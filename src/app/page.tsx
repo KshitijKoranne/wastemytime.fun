@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { activities } from "@/data/activities";
 import { useState, useEffect } from "react";
-import Script from "next/script";
 
 export default function Home() {
   const [floatingShapes, setFloatingShapes] = useState<Array<{id: number, x: number, y: number, size: number, color: string, speed: number}>>([]);

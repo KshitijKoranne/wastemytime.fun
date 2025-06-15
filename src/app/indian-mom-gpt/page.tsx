@@ -53,7 +53,7 @@ export default function IndianMomGPT() {
             <div className="bg-amber-100 rounded-2xl p-4 border-2 border-amber-300">
               <div className="text-2xl mb-2">😄</div>
               <div className="text-amber-800 font-semibold">Funny & Chill</div>
-              <div className="text-sm text-amber-600">When mom's in a good mood</div>
+              <div className="text-sm text-amber-600">When mom&apos;s in a good mood</div>
             </div>
           </div>
 
@@ -80,7 +80,7 @@ export default function IndianMomGPT() {
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-green-500">✓</span>
-                <span>Comparison with "Sharma ji's son" included!</span>
+                <span>Comparison with &quot;Sharma ji&apos;s son&quot; included!</span>
               </li>
             </ul>
           </div>
