@@ -308,19 +308,21 @@ export default function IndianExperiences() {
 
   // Load achievements from localStorage on component mount
   useEffect(() => {
-    const stored = localStorage.getItem('indian-achievements');
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setUnlockedAchievements(parsed.map((a: any) => ({
-        ...a,
-        unlockedAt: new Date(a.unlockedAt)
-      })));
-    }
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('indian-achievements');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setUnlockedAchievements(parsed.map((a: any) => ({
+          ...a,
+          unlockedAt: new Date(a.unlockedAt)
+        })));
+      }
 
-    // Load checked experiences
-    const storedExperiences = localStorage.getItem('indian-experiences-checked');
-    if (storedExperiences) {
-      setCheckedExperiences(JSON.parse(storedExperiences));
+      // Load checked experiences
+      const storedExperiences = localStorage.getItem('indian-experiences-checked');
+      if (storedExperiences) {
+        setCheckedExperiences(JSON.parse(storedExperiences));
+      }
     }
 
     // Time-based achievements
@@ -348,7 +350,9 @@ export default function IndianExperiences() {
     setCompletionPercentage(percentage);
 
     // Save checked experiences
-    localStorage.setItem('indian-experiences-checked', JSON.stringify(checkedExperiences));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('indian-experiences-checked', JSON.stringify(checkedExperiences));
+    }
 
     // Progress-based achievements
     if (checkedCount === 1) unlockAchievementById('first-experience');
@@ -430,7 +434,9 @@ export default function IndianExperiences() {
 
     setUnlockedAchievements(prev => {
       const updated = [...prev, newAchievement];
-      localStorage.setItem('indian-achievements', JSON.stringify(updated));
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('indian-achievements', JSON.stringify(updated));
+      }
       return updated;
     });
 
@@ -702,7 +708,7 @@ export default function IndianExperiences() {
               </div>
               <div className="bg-red-800 text-yellow-100 p-4 border-2 border-black">
                 <div className="text-3xl font-bold">
-                  {Math.floor(Object.keys(localStorage).filter(key => key.startsWith('achievement-')).length)}
+                  {typeof window !== 'undefined' ? Math.floor(Object.keys(localStorage).filter(key => key.startsWith('achievement-')).length) : 0}
                 </div>
                 <div className="text-sm font-bold">पुरस्कार</div>
               </div>

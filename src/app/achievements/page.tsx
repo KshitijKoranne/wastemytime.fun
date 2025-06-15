@@ -320,25 +320,27 @@ export default function PointlessAchievements() {
     };
 
     // Check for returning visitor
-    const lastVisit = localStorage.getItem('wastemytime-last-visit');
-    const today = new Date().toDateString();
-    if (lastVisit && lastVisit !== today) {
-      unlockAchievement('came-back');
-    }
-    localStorage.setItem('wastemytime-last-visit', today);
+    if (typeof window !== 'undefined') {
+      const lastVisit = localStorage.getItem('wastemytime-last-visit');
+      const today = new Date().toDateString();
+      if (lastVisit && lastVisit !== today) {
+        unlockAchievement('came-back');
+      }
+      localStorage.setItem('wastemytime-last-visit', today);
 
-    // Track activity visits
-    const visitedActivities = JSON.parse(localStorage.getItem('wastemytime-visited') || '[]');
-    if (visitedActivities.length >= 5) {
-      unlockAchievement('collector-distractions');
-    }
+      // Track activity visits
+      const visitedActivities = JSON.parse(localStorage.getItem('wastemytime-visited') || '[]');
+      if (visitedActivities.length >= 5) {
+        unlockAchievement('collector-distractions');
+      }
 
-    // Check refresh count
-    const refreshCount = parseInt(localStorage.getItem('wastemytime-refresh-count') || '0');
-    if (refreshCount >= 3) {
-      unlockAchievement('rage-refresher');
+      // Check refresh count
+      const refreshCount = parseInt(localStorage.getItem('wastemytime-refresh-count') || '0');
+      if (refreshCount >= 3) {
+        unlockAchievement('rage-refresher');
+      }
+      localStorage.setItem('wastemytime-refresh-count', (refreshCount + 1).toString());
     }
-    localStorage.setItem('wastemytime-refresh-count', (refreshCount + 1).toString());
 
     // Add event listeners
     document.addEventListener('mousemove', handleMouseMoveBasic);

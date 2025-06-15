@@ -161,10 +161,12 @@ export default function Home() {
               style={{ animationDelay: `${index * 0.1}s` }}
               onClick={() => {
                 // Track activity visits for achievements
-                const visited = JSON.parse(localStorage.getItem('wastemytime-visited') || '[]');
-                if (!visited.includes(activity.id)) {
-                  visited.push(activity.id);
-                  localStorage.setItem('wastemytime-visited', JSON.stringify(visited));
+                if (typeof window !== 'undefined') {
+                  const visited = JSON.parse(localStorage.getItem('wastemytime-visited') || '[]');
+                  if (!visited.includes(activity.id)) {
+                    visited.push(activity.id);
+                    localStorage.setItem('wastemytime-visited', JSON.stringify(visited));
+                  }
                 }
               }}
             >
