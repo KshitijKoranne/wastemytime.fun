@@ -1,6 +1,7 @@
 {
-  "name": "wastemytime-app",
+  "name": "wastemytime",
   "version": "0.1.0",
+  "description": "A collection of playful, absurd, interactive micro-experiences inspired by Neal.fun",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(mv:*)",
+      "Bash(true)",
+      "Bash(rmdir:*)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}
