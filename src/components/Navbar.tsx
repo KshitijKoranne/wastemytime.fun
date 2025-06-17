@@ -86,6 +86,14 @@ export default function Navbar() {
           borderBottom: '4px solid #0891b2',
           boxShadow: '0 4px 20px rgba(8, 145, 178, 0.3)'
         };
+      case '/snake-fade':
+        return {
+          background: 'linear-gradient(135deg, #1a1a1a, #2d2d2d, #404040, #1a1a1a)',
+          backgroundSize: '400% 400%',
+          animation: 'gradientShift 6s ease infinite',
+          borderBottom: '4px solid #00ff00',
+          boxShadow: '0 4px 20px rgba(0, 255, 0, 0.2)'
+        };
       default:
         return {
           backgroundColor: 'rgba(255, 255, 255, 0.9)',
@@ -187,6 +195,16 @@ export default function Navbar() {
           transform: 'skew(-2deg)',
           letterSpacing: '1.2px'
         };
+      case '/snake-fade':
+        return {
+          fontFamily: 'monospace',
+          color: '#00ff00',
+          textShadow: '0 0 20px #00ff00, 2px 2px 0px #000, 0 0 40px rgba(0, 255, 0, 0.4)',
+          fontWeight: 'bold',
+          fontSize: '1.08em',
+          letterSpacing: '2px',
+          transform: 'rotate(0deg)'
+        };
       default:
         return {};
     }
@@ -277,6 +295,16 @@ export default function Navbar() {
           backgroundColor: '#16a085',
           boxShadow: '0 0 25px rgba(8, 145, 178, 0.5), 0 0 15px rgba(22, 160, 133, 0.7)',
           transform: 'scale(1.05) rotate(-2deg)'
+        };
+      case '/snake-fade':
+        return {
+          color: '#00ff00',
+          border: '2px solid #00ff00',
+          borderRadius: '4px',
+          padding: '8px',
+          backgroundColor: '#000000',
+          boxShadow: '0 0 15px rgba(0, 255, 0, 0.3), inset 0 0 10px rgba(0, 255, 0, 0.1)',
+          transform: 'scale(1.02)'
         };
       default:
         return {

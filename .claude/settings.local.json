@@ -9,7 +9,9 @@
       "Bash(mkdir:*)",
       "Bash(rm:*)",
       "Bash(grep:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }
