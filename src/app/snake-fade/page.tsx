@@ -304,14 +304,6 @@ export default function SnakeFade() {
         
         setContrast(prev => {
           const newContrast = Math.max(0, prev - contrastDecrease);
-          // If contrast reaches 0, end the game
-          if (newContrast <= 0) {
-            gameOverRef.current = true;
-            gameStartedRef.current = false;
-            setGameOver(true);
-            setGameStarted(false);
-            return 1; // Reset contrast to 100% when game ends
-          }
           return newContrast;
         });
       }
@@ -417,13 +409,33 @@ export default function SnakeFade() {
   }, [handleKeyDown]);
 
   return (
-    <div className="min-h-screen" style={{
+    <div className="h-screen overflow-hidden" style={{
       background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%)',
       backgroundSize: '400% 400%',
       animation: 'gradientShift 10s ease infinite'
     }}>
+      {/* Stats in top right corner */}
+      <div className="absolute top-20 right-4 z-10 flex space-x-4">
+        <div className="bg-black border border-green-400 px-3 py-2 font-mono" style={{
+          boxShadow: 'inset 0 0 10px rgba(0, 255, 0, 0.2)'
+        }}>
+          <div className="text-xs text-green-400">CONTRAST</div>
+          <div className="font-bold text-green-400 text-base">
+            {Math.floor(contrast * 100)}%
+          </div>
+        </div>
+        <div className="bg-black border border-green-400 px-3 py-2 font-mono" style={{
+          boxShadow: 'inset 0 0 10px rgba(0, 255, 0, 0.2)'
+        }}>
+          <div className="text-xs text-green-400">SCORE</div>
+          <div className="font-bold text-green-400 text-base">
+            {hardMode ? `HARD ${score}` : score}
+          </div>
+        </div>
+      </div>
+
       {/* Game area with controlled opacity */}
-      <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+      <div className="h-full flex items-center justify-center px-2 sm:px-4">
         <div 
           className="flex flex-col items-center justify-center text-center"
           style={{ opacity: contrast }}
@@ -444,28 +456,9 @@ export default function SnakeFade() {
             </div>
           </div>
 
-          {/* Stats Section */}
-          <div className="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-6 md:space-x-8 mb-4 sm:mb-6">
-            <div className="bg-black border border-green-400 px-3 sm:px-4 py-2 font-mono" style={{
-              boxShadow: 'inset 0 0 10px rgba(0, 255, 0, 0.2)'
-            }}>
-              <div className="text-xs sm:text-sm text-green-400">CONTRAST</div>
-              <div className="font-bold text-green-400 text-base sm:text-lg">
-                {Math.floor(contrast * 100)}%
-              </div>
-            </div>
-            <div className="bg-black border border-green-400 px-3 sm:px-4 py-2 font-mono" style={{
-              boxShadow: 'inset 0 0 10px rgba(0, 255, 0, 0.2)'
-            }}>
-              <div className="text-xs sm:text-sm text-green-400">SCORE</div>
-              <div className="font-bold text-green-400 text-base sm:text-lg">
-                {hardMode ? `HARD ${score}` : score}
-              </div>
-            </div>
-          </div>
 
           {/* Game Board */}
-          <div className="bg-black border-2 border-green-400 p-2 sm:p-3 md:p-4 mb-4 sm:mb-6" style={{
+          <div className="bg-black border-2 border-green-400 p-2 sm:p-3 md:p-4" style={{
             boxShadow: '0 0 25px rgba(0, 255, 0, 0.3), inset 0 0 15px rgba(0, 255, 0, 0.1)'
           }}>
             <div 
@@ -498,111 +491,36 @@ export default function SnakeFade() {
             </div>
           </div>
 
-          {/* Instructions and Game Over */}
-          <div className="text-center">
-            {!gameStarted && !gameOver && (
-              <div className="bg-black border border-green-400 p-3 sm:p-4 max-w-xs sm:max-w-md mx-auto font-mono" style={{
+          {/* Game Status Messages - Positioned over game */}
+          {!gameStarted && !gameOver && (
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <div className="bg-black border border-green-400 p-4 font-mono" style={{
                 boxShadow: '0 0 15px rgba(0, 255, 0, 0.3)'
               }}>
-                <p className="text-green-400 mb-2 text-sm sm:text-base">> PRESS ARROW KEY OR SPACE TO START</p>
-                <p className="text-green-400 text-xs sm:text-sm opacity-80">
+                <p className="text-green-400 mb-2 text-base">> PRESS ARROW KEY OR SPACE TO START</p>
+                <p className="text-green-400 text-sm opacity-80">
                   > PRESS H FOR HARD MODE
                 </p>
               </div>
-            )}
-            
-            {gameOver && (
-              <div className="bg-red-900 border border-red-400 p-3 sm:p-4 max-w-xs sm:max-w-md mx-auto font-mono" style={{
+            </div>
+          )}
+          
+          {gameOver && (
+            <div className="absolute inset-0 flex items-center justify-center z-20">
+              <div className="bg-red-900 border border-red-400 p-4 font-mono" style={{
                 boxShadow: '0 0 15px rgba(255, 0, 0, 0.3)'
               }}>
-                <p className="text-red-400 text-base sm:text-lg font-bold mb-2">> GAME TERMINATED</p>
-                <p className="text-red-400 mb-2 text-sm sm:text-base">> PRESS SPACE TO RESTART</p>
-                <p className="text-red-400 text-xs sm:text-sm opacity-80">
+                <p className="text-red-400 text-lg font-bold mb-2">> GAME TERMINATED</p>
+                <p className="text-red-400 mb-2 text-base">> PRESS SPACE TO RESTART</p>
+                <p className="text-red-400 text-sm opacity-80">
                   {hardMode 
                     ? "> PRESS E FOR EASY MODE"
                     : "> PRESS H FOR HARD MODE"
                   }
                 </p>
               </div>
-            )}
-          </div>
-
-          {/* Mobile Controls */}
-          <div className="mt-4 sm:mt-6 block sm:hidden">
-            <div className="bg-black border border-green-400 p-3 mb-4 font-mono text-center" style={{
-              boxShadow: '0 0 15px rgba(0, 255, 0, 0.3)'
-            }}>
-              <p className="text-green-400 text-xs mb-2">> MOBILE CONTROLS</p>
-              <div className="grid grid-cols-3 gap-2 max-w-32 mx-auto">
-                <div></div>
-                <button 
-                  className="bg-green-900 border border-green-400 text-green-400 p-2 text-xs font-mono active:bg-green-400 active:text-black"
-                  onTouchStart={() => {
-                    const event = new KeyboardEvent('keydown', { key: 'ArrowUp' });
-                    document.dispatchEvent(event);
-                  }}
-                >
-                  ↑
-                </button>
-                <div></div>
-                <button 
-                  className="bg-green-900 border border-green-400 text-green-400 p-2 text-xs font-mono active:bg-green-400 active:text-black"
-                  onTouchStart={() => {
-                    const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
-                    document.dispatchEvent(event);
-                  }}
-                >
-                  ←
-                </button>
-                <button 
-                  className="bg-green-900 border border-green-400 text-green-400 p-2 text-xs font-mono active:bg-green-400 active:text-black"
-                  onTouchStart={() => {
-                    const event = new KeyboardEvent('keydown', { key: ' ' });
-                    document.dispatchEvent(event);
-                  }}
-                >
-                  SPC
-                </button>
-                <button 
-                  className="bg-green-900 border border-green-400 text-green-400 p-2 text-xs font-mono active:bg-green-400 active:text-black"
-                  onTouchStart={() => {
-                    const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
-                    document.dispatchEvent(event);
-                  }}
-                >
-                  →
-                </button>
-                <div></div>
-                <button 
-                  className="bg-green-900 border border-green-400 text-green-400 p-2 text-xs font-mono active:bg-green-400 active:text-black"
-                  onTouchStart={() => {
-                    const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
-                    document.dispatchEvent(event);
-                  }}
-                >
-                  ↓
-                </button>
-                <div></div>
-              </div>
             </div>
-          </div>
-
-          {/* Instructions */}
-          <div className="mt-4 sm:mt-6 text-center max-w-xs sm:max-w-lg mx-auto">
-            <div className="bg-black border border-green-400 p-3 sm:p-4 font-mono" style={{
-              boxShadow: '0 0 15px rgba(0, 255, 0, 0.3)'
-            }}>
-              <p className="text-green-400 text-xs sm:text-sm mb-2">
-                > NAVIGATE SNAKE TO EAT FOOD
-              </p>
-              <p className="text-green-400 text-xs sm:text-sm mb-2">
-                > WARNING: VISIBILITY DECREASES OVER TIME
-              </p>
-              <p className="text-green-400 text-xs opacity-80">
-                ARROW KEYS: MOVE • SPACE: RESTART • H/E: DIFFICULTY
-              </p>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 

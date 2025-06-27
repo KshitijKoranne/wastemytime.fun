@@ -23,12 +23,12 @@ export default function ScrollSpeedTest() {
   const [scrollAttempts, setScrollAttempts] = useState(0);
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [achievements, setAchievements] = useState<Achievement[]>([
-    { threshold: 1000, title: 'Getting Started', description: 'First 1K pixels per second!', icon: '🚀', unlocked: false },
-    { threshold: 5000, title: 'Speed Demon', description: 'Reached 5K pixels per second!', icon: '⚡', unlocked: false },
-    { threshold: 10000, title: 'Scroll Master', description: 'Hit 10K pixels per second!', icon: '🌪️', unlocked: false },
-    { threshold: 15000, title: 'Tornado Fingers', description: '15K pixels per second achieved!', icon: '🌀', unlocked: false },
-    { threshold: 20000, title: 'Superhuman', description: '20K pixels per second - Are you even human?', icon: '🦸', unlocked: false },
-    { threshold: 25000, title: 'Scroll God', description: 'The legendary 25K+ pixels per second!', icon: '👑', unlocked: false },
+    { threshold: 500, title: 'Getting Started', description: 'First 500 pixels per second!', icon: '🚀', unlocked: false },
+    { threshold: 1500, title: 'Speed Demon', description: 'Reached 1.5K pixels per second!', icon: '⚡', unlocked: false },
+    { threshold: 3000, title: 'Scroll Master', description: 'Hit 3K pixels per second!', icon: '🌪️', unlocked: false },
+    { threshold: 5000, title: 'Tornado Fingers', description: '5K pixels per second achieved!', icon: '🌀', unlocked: false },
+    { threshold: 8000, title: 'Superhuman', description: '8K pixels per second - Are you even human?', icon: '🦸', unlocked: false },
+    { threshold: 12000, title: 'Scroll God', description: 'The legendary 12K+ pixels per second!', icon: '👑', unlocked: false },
   ]);
   const [newAchievement, setNewAchievement] = useState<Achievement | null>(null);
   
@@ -36,53 +36,61 @@ export default function ScrollSpeedTest() {
   const startTime = useRef<number>(Date.now());
   const animationFrame = useRef<number>();
 
-  // Color interpolation function
+  // Soothing color interpolation function
   const getColorForSpeed = (speed: number): string => {
-    const maxSpeed = 25000;
+    const maxSpeed = 12000;
     const normalizedSpeed = Math.min(speed / maxSpeed, 1);
     
-    if (normalizedSpeed < 0.33) {
-      // Green to Orange
-      const ratio = normalizedSpeed / 0.33;
-      const r = Math.floor(46 + (255 - 46) * ratio);
-      const g = Math.floor(204 + (154 - 204) * ratio);
-      const b = Math.floor(113 + (66 - 113) * ratio);
+    if (normalizedSpeed < 0.25) {
+      // Soft Blue to Teal (0-25%)
+      const ratio = normalizedSpeed / 0.25;
+      const r = Math.floor(99 + (64 - 99) * ratio);      // 99 → 64
+      const g = Math.floor(179 + (224 - 179) * ratio);   // 179 → 224
+      const b = Math.floor(237 + (208 - 237) * ratio);   // 237 → 208
       return `rgb(${r}, ${g}, ${b})`;
-    } else if (normalizedSpeed < 0.66) {
-      // Orange to Red
-      const ratio = (normalizedSpeed - 0.33) / 0.33;
-      const r = Math.floor(255);
-      const g = Math.floor(154 - 78 * ratio);
-      const b = Math.floor(66 - 6 * ratio);
+    } else if (normalizedSpeed < 0.5) {
+      // Teal to Mint Green (25-50%)
+      const ratio = (normalizedSpeed - 0.25) / 0.25;
+      const r = Math.floor(64 + (134 - 64) * ratio);     // 64 → 134
+      const g = Math.floor(224 + (239 - 224) * ratio);   // 224 → 239
+      const b = Math.floor(208 + (172 - 208) * ratio);   // 208 → 172
+      return `rgb(${r}, ${g}, ${b})`;
+    } else if (normalizedSpeed < 0.75) {
+      // Mint Green to Soft Orange (50-75%)
+      const ratio = (normalizedSpeed - 0.5) / 0.25;
+      const r = Math.floor(134 + (251 - 134) * ratio);   // 134 → 251
+      const g = Math.floor(239 + (191 - 239) * ratio);   // 239 → 191
+      const b = Math.floor(172 + (128 - 172) * ratio);   // 172 → 128
       return `rgb(${r}, ${g}, ${b})`;
     } else {
-      // Red to Purple
-      const ratio = (normalizedSpeed - 0.66) / 0.34;
-      const r = Math.floor(255 - 124 * ratio);
-      const g = Math.floor(76 - 76 * ratio);
-      const b = Math.floor(60 + 195 * ratio);
+      // Soft Orange to Lavender (75-100%)
+      const ratio = (normalizedSpeed - 0.75) / 0.25;
+      const r = Math.floor(251 + (196 - 251) * ratio);   // 251 → 196
+      const g = Math.floor(191 + (181 - 191) * ratio);   // 191 → 181
+      const b = Math.floor(128 + (253 - 128) * ratio);   // 128 → 253
       return `rgb(${r}, ${g}, ${b})`;
     }
   };
 
   const getFontSize = (speed: number): number => {
-    return Math.min(32 + (speed / 25000) * 100, 200);
+    return Math.min(32 + (speed / 12000) * 100, 200);
   };
 
   const calculateSpeed = useCallback(() => {
     const now = Date.now();
     let total = 0;
     
-    // Filter data from the last second and sum deltas
+    // Filter data from the last 1.2 seconds and sum deltas (slightly longer for smoother transitions)
     lastSecondData.current = lastSecondData.current.filter(data => {
-      if (now - data.timestamp <= 1000) {
+      if (now - data.timestamp <= 1200) {
         total += data.delta;
         return true;
       }
       return false;
     });
 
-    return Math.round(total);
+    // Scale back to per-second rate
+    return Math.round(total * (1000 / 1200));
   }, []);
 
   const handleWheel = useCallback((e: WheelEvent) => {
@@ -98,7 +106,7 @@ export default function ScrollSpeedTest() {
     setIsScrolling(true);
 
     // Reset scrolling state after a delay
-    setTimeout(() => setIsScrolling(false), 100);
+    setTimeout(() => setIsScrolling(false), 200);
   }, []);
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
@@ -112,7 +120,7 @@ export default function ScrollSpeedTest() {
       });
       setTotalScrolled(prev => prev + delta);
       setIsScrolling(true);
-      setTimeout(() => setIsScrolling(false), 100);
+      setTimeout(() => setIsScrolling(false), 200);
     }
   }, []);
 
@@ -187,12 +195,12 @@ export default function ScrollSpeedTest() {
   };
 
   const getSpeedRating = (speed: number): string => {
-    if (speed >= 25000) return 'LEGENDARY 👑';
-    if (speed >= 20000) return 'SUPERHUMAN 🦸';
-    if (speed >= 15000) return 'TORNADO 🌀';
-    if (speed >= 10000) return 'MASTER 🌪️';
-    if (speed >= 5000) return 'DEMON ⚡';
-    if (speed >= 1000) return 'FAST 🚀';
+    if (speed >= 12000) return 'LEGENDARY 👑';
+    if (speed >= 8000) return 'SUPERHUMAN 🦸';
+    if (speed >= 5000) return 'TORNADO 🌀';
+    if (speed >= 3000) return 'MASTER 🌪️';
+    if (speed >= 1500) return 'DEMON ⚡';
+    if (speed >= 500) return 'FAST 🚀';
     return 'GETTING STARTED 🐌';
   };
 
@@ -200,7 +208,7 @@ export default function ScrollSpeedTest() {
     <div 
       className="min-h-screen flex flex-col items-center justify-center transition-all duration-300 relative overflow-hidden"
       style={{ 
-        backgroundColor: currentSpeed > 0 ? getColorForSpeed(currentSpeed) : '#2ecc71',
+        backgroundColor: currentSpeed > 0 ? getColorForSpeed(currentSpeed) : '#63b3ed',
       }}
     >
       {/* Particle effects when scrolling fast */}
@@ -264,9 +272,6 @@ export default function ScrollSpeedTest() {
                 <div className="text-white/80 text-sm mt-2">{getSpeedRating(bestSpeed)}</div>
               </div>
             )}
-            <div className="text-white/60 text-sm">
-              💡 Tip: Try different scroll techniques - fast small scrolls vs. big wheel movements!
-            </div>
           </div>
         ) : (
           // Active scrolling display
