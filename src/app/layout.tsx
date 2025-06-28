@@ -36,6 +36,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Waste My Time" }],
   creator: "Waste My Time",
   publisher: "Waste My Time",
+  applicationName: "Waste My Time",
+  category: "Entertainment",
+  classification: "Interactive Games and Activities",
   formatDetection: {
     email: false,
     address: false,
@@ -43,7 +46,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL('https://wastemytime.fun'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://wastemytime.fun',
   },
   openGraph: {
     title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
@@ -158,6 +161,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="SIhSFzG-_wB5brnoEV_CRi-ovHUfjB-lJ9ziBDyJYeQ" />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="canonical" href="https://wastemytime.fun" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />

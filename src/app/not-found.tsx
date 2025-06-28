@@ -4,10 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function NotFound() {
-  const [danceMove, setDanceMove] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [clickCount, setClickCount] = useState(0);
-
-  const danceMoves = ['🍌', '🕺', '💃', '🕺', '🍌', '💃', '🕺', '🍌'];
   const funnyMessages = [
     "Oops! You found a page that doesn't exist!",
     "404: Page not found, but banana found!",
@@ -30,8 +28,8 @@ export default function NotFound() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDanceMove(prev => (prev + 1) % danceMoves.length);
-    }, 500);
+      setIsAnimating(prev => !prev);
+    }, 800);
 
     return () => clearInterval(interval);
   }, []);
@@ -63,10 +61,20 @@ export default function NotFound() {
 
         <div className="mb-8">
           <div 
-            className="text-8xl cursor-pointer hover:scale-110 transition-transform duration-200 inline-block"
+            className={`cursor-pointer hover:scale-110 transition-all duration-300 inline-block ${
+              isAnimating ? 'animate-bounce' : ''
+            } ${clickCount > 0 ? 'animate-pulse' : ''}`}
             onClick={handleBananaClick}
           >
-            {danceMoves[danceMove]}
+            <img 
+              src="/images/dancing-banana.jpg" 
+              alt="Dancing Banana" 
+              className="w-32 h-32 md:w-40 md:h-40 object-contain mx-auto rounded-2xl shadow-lg"
+              style={{
+                transform: isAnimating ? 'rotate(5deg)' : 'rotate(-5deg)',
+                transition: 'transform 0.3s ease-in-out'
+              }}
+            />
           </div>
           <div className="mt-4 text-gray-600">
             {clickCount > 0 && (
@@ -87,18 +95,37 @@ export default function NotFound() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Link 
-              href="/bubble-wrap" 
-              className="bg-green-100 hover:bg-green-200 border-2 border-green-300 rounded-lg p-4 transition-all hover:scale-105"
+              href="/earths-heartbeat" 
+              className="group"
             >
-              <div className="text-2xl mb-2">🫧</div>
-              <div className="font-semibold">Virtual Bubble Wrap</div>
+              <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-black hover:bg-gray-50 transition-all duration-200 group-hover:scale-105 relative w-full h-32">
+                {/* Earth's Heartbeat tile - image fills entire rectangle */}
+                <div className="absolute inset-0 rounded-xl overflow-hidden">
+                  <img 
+                    src="/images/earths_heartbeat.png" 
+                    alt="Earth's Heartbeat"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
             </Link>
             <Link 
-              href="/progress-bar" 
-              className="bg-blue-100 hover:bg-blue-200 border-2 border-blue-300 rounded-lg p-4 transition-all hover:scale-105"
+              href="/snake-fade" 
+              className="group"
             >
-              <div className="text-2xl mb-2">🚧</div>
-              <div className="font-semibold">Broken Progress Bar</div>
+              <div className="bg-white border-2 border-gray-200 rounded-xl hover:border-black hover:bg-gray-50 transition-all duration-200 group-hover:scale-105 relative w-full h-32">
+                {/* Snake game tile - image fills entire rectangle */}
+                <div className="absolute inset-0 rounded-xl overflow-hidden">
+                  <img 
+                    src="/images/snake.png" 
+                    alt="Snake Game"
+                    className="w-full h-full object-cover"
+                    style={{ 
+                      imageRendering: 'crisp-edges'
+                    }}
+                  />
+                </div>
+              </div>
             </Link>
           </div>
         </div>

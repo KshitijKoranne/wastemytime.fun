@@ -7,6 +7,16 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const getNavbarStyle = () => {
+    // Handle 404 pages and unknown routes
+    if (pathname === '/not-found' || !pathname || pathname.includes('404')) {
+      return {
+        background: 'rgba(255, 165, 0, 0.9)',
+        backdropFilter: 'blur(20px)',
+        borderBottom: '3px solid #ea580c',
+        boxShadow: '0 8px 32px rgba(234, 88, 12, 0.3)'
+      };
+    }
+    
     switch (pathname) {
       case '/':
         return {
@@ -93,6 +103,19 @@ export default function Navbar() {
   };
 
   const getLogoStyle = () => {
+    // Handle 404 pages and unknown routes
+    if (pathname === '/not-found' || !pathname || pathname.includes('404')) {
+      return {
+        fontFamily: 'cursive',
+        color: '#ffffff',
+        textShadow: '0 0 15px rgba(255,255,255,0.9), 3px 3px 0px #ea580c, 0 0 30px rgba(234, 88, 12, 0.4)',
+        fontWeight: 'bold',
+        fontSize: '1.15em',
+        transform: 'rotate(-1deg)',
+        letterSpacing: '1px'
+      };
+    }
+    
     switch (pathname) {
       case '/':
         return {
