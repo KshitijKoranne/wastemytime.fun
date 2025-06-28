@@ -112,6 +112,24 @@ export default function Home() {
                         className="w-full h-full object-cover"
                       />
                     </div>
+                  ) : activity.id === 'life-calendar' ? (
+                    /* Life Calendar tile - image fills entire rectangle */
+                    <div className="absolute inset-0 rounded-xl overflow-hidden">
+                      <img 
+                        src="/images/life in weeks.png" 
+                        alt="Life in Weeks"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : activity.id === 'earths-heartbeat' ? (
+                    /* Earth's Heartbeat tile - image fills entire rectangle */
+                    <div className="absolute inset-0 rounded-xl overflow-hidden">
+                      <img 
+                        src="/images/earths_heartbeat.png" 
+                        alt="Earth's Heartbeat"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                   ) : (
                     /* Other activities - horizontal layout */
                     <>
@@ -200,6 +218,24 @@ export default function Home() {
                       <img 
                         src="/images/scroll_speed.png" 
                         alt="Scroll Speed Challenge"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : activity.id === 'life-calendar' ? (
+                    /* Life Calendar tile - image fills entire rectangle */
+                    <div className="absolute inset-0 rounded-xl overflow-hidden">
+                      <img 
+                        src="/images/life in weeks.png" 
+                        alt="Life in Weeks"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  ) : activity.id === 'earths-heartbeat' ? (
+                    /* Earth's Heartbeat tile - image fills entire rectangle */
+                    <div className="absolute inset-0 rounded-xl overflow-hidden">
+                      <img 
+                        src="/images/earths_heartbeat.png" 
+                        alt="Earth's Heartbeat"
                         className="w-full h-full object-cover"
                       />
                     </div>
