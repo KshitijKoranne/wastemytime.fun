@@ -85,14 +85,7 @@ export default function NotFound() {
           <h3 className="text-2xl font-bold text-gray-800 mb-4">
             Since you're here, why not try one of these?
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Link 
-              href="/click-me" 
-              className="bg-pink-100 hover:bg-pink-200 border-2 border-pink-300 rounded-lg p-4 transition-all hover:scale-105"
-            >
-              <div className="text-2xl mb-2">👆</div>
-              <div className="font-semibold">Click Me Forever</div>
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Link 
               href="/bubble-wrap" 
               className="bg-green-100 hover:bg-green-200 border-2 border-green-300 rounded-lg p-4 transition-all hover:scale-105"

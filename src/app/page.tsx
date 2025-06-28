@@ -289,6 +289,11 @@ export default function Home() {
               <div>Pointless</div>
             </div>
           </div>
+          <div className="mt-6 pt-4 border-t border-gray-100">
+            <p className="text-xs text-gray-400">
+              Made in INDIA with ❤️ by KSK Labs
+            </p>
+          </div>
         </footer>
       </div>
     </div>

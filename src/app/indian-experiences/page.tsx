@@ -530,19 +530,19 @@ export default function IndianExperiences() {
 
       {/* Achievement notification - Vintage style */}
       {achievementUnlocked && (
-        <div className="fixed top-20 right-4 z-50 animate-slide-in">
-          <div className="relative bg-yellow-100 text-black p-6 border-8 border-red-800 shadow-2xl max-w-sm transform -rotate-2" style={{
+        <div className="fixed top-4 left-4 right-4 md:top-20 md:right-4 md:left-auto z-50 animate-slide-in">
+          <div className="relative bg-yellow-100 text-black p-4 md:p-6 border-4 md:border-8 border-red-800 shadow-2xl max-w-sm mx-auto md:mx-0 transform -rotate-1 md:-rotate-2" style={{
             backgroundImage: 'url("data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%23d4af37" fill-opacity="0.1"%3E%3Cpath d="M0 0h20v20H0z"/%3E%3C/g%3E%3C/svg%3E")',
             fontFamily: 'serif',
-            boxShadow: '10px 10px 0px #8b4513, 15px 15px 0px rgba(0,0,0,0.3)'
+            boxShadow: '6px 6px 0px #8b4513, 10px 10px 0px rgba(0,0,0,0.3)'
           }}>
-            <div className="absolute -top-2 -left-2 bg-red-600 text-yellow-100 px-2 py-1 text-xs font-bold transform rotate-12">
+            <div className="absolute -top-1 -left-1 md:-top-2 md:-left-2 bg-red-600 text-yellow-100 px-2 py-1 text-xs font-bold transform rotate-12">
               AWARD
             </div>
             <div className="text-center">
-              <div className="text-3xl mb-2 animate-bounce">★</div>
-              <div className="text-sm uppercase tracking-wide font-bold text-red-800">पुरस्कार मिला!</div>
-              <div className="text-lg font-bold text-black">{achievementUnlocked}</div>
+              <div className="text-2xl md:text-3xl mb-2 animate-bounce">★</div>
+              <div className="text-xs md:text-sm uppercase tracking-wide font-bold text-red-800">पुरस्कार मिला!</div>
+              <div className="text-base md:text-lg font-bold text-black">{achievementUnlocked}</div>
             </div>
           </div>
         </div>
@@ -550,40 +550,40 @@ export default function IndianExperiences() {
 
       <div className="relative z-10 max-w-6xl mx-auto p-4 pt-20">
         {/* Header - Bollywood Poster Style */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           {/* Main title with vintage cinema styling */}
           <div className="relative inline-block">
-            <div className="absolute -inset-4 bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 transform -rotate-1 rounded-lg opacity-80"></div>
-            <h1 className="relative text-6xl font-bold text-yellow-100 px-8 py-4" style={{
+            <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 transform -rotate-1 rounded-lg opacity-80"></div>
+            <h1 className="relative text-3xl md:text-6xl font-bold text-yellow-100 px-4 md:px-8 py-2 md:py-4" style={{
               fontFamily: 'serif',
-              textShadow: '4px 4px 0px #8b4513, 8px 8px 0px rgba(0,0,0,0.5)',
-              letterSpacing: '2px'
+              textShadow: '2px 2px 0px #8b4513, 4px 4px 0px rgba(0,0,0,0.5)',
+              letterSpacing: '1px'
             }}>
               भारतीय अनुभव
             </h1>
           </div>
           
-          <div className="mt-4 text-3xl font-bold text-yellow-400" style={{
+          <div className="mt-4 text-xl md:text-3xl font-bold text-yellow-400" style={{
             fontFamily: 'serif',
             textShadow: '2px 2px 0px #8b4513'
           }}>
             200 Relatable Indian Moments
           </div>
           
-          <div className="mt-6 bg-yellow-100 border-4 border-red-800 p-6 max-w-lg mx-auto transform rotate-1" style={{
+          <div className="mt-6 bg-yellow-100 border-2 md:border-4 border-red-800 p-4 md:p-6 max-w-lg mx-auto transform rotate-1" style={{
             fontFamily: 'serif',
-            boxShadow: '8px 8px 0px #8b4513'
+            boxShadow: '4px 4px 0px #8b4513'
           }}>
-            <div className="text-red-800 text-xl font-bold mb-2">
+            <div className="text-red-800 text-lg md:text-xl font-bold mb-2">
               आपका स्कोर: {completionPercentage}%
             </div>
-            <div className="bg-red-800 h-6 border-2 border-black">
+            <div className="bg-red-800 h-4 md:h-6 border-2 border-black">
               <div 
                 className="bg-yellow-400 h-full transition-all duration-500 border-r-2 border-black"
                 style={{ width: `${completionPercentage}%` }}
               />
             </div>
-            <div className="text-black text-sm mt-2 font-bold">
+            <div className="text-black text-xs md:text-sm mt-2 font-bold">
               {checkedCount} / {experiences.length} experiences
             </div>
             
@@ -593,7 +593,7 @@ export default function IndianExperiences() {
                 setShowAchievementShowcase(true);
                 unlockAchievementById('social-sharer');
               }}
-              className="mt-4 bg-red-800 text-yellow-100 px-4 py-2 font-bold border-2 border-black hover:bg-red-700 transition-all"
+              className="mt-4 bg-red-800 text-yellow-100 px-3 md:px-4 py-2 font-bold border-2 border-black hover:bg-red-700 transition-all text-sm md:text-base"
             >
               🏆 देखें Achievements ({unlockedAchievements.length})
             </button>

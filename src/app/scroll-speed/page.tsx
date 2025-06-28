@@ -231,12 +231,12 @@ export default function ScrollSpeedTest() {
 
       {/* Achievement notification */}
       {newAchievement && (
-        <div className="fixed top-20 right-4 z-50 animate-slide-in">
-          <div className="bg-yellow-400 text-black p-4 rounded-lg border-4 border-black shadow-2xl max-w-sm font-bold">
+        <div className="fixed top-4 left-4 right-4 md:top-20 md:right-4 md:left-auto z-50 animate-slide-in">
+          <div className="bg-yellow-400 text-black p-3 md:p-4 rounded-lg border-2 md:border-4 border-black shadow-2xl max-w-sm mx-auto md:mx-0 font-bold">
             <div className="text-center">
-              <div className="text-3xl mb-2 animate-bounce">{newAchievement.icon}</div>
-              <div className="text-sm uppercase tracking-wide">ACHIEVEMENT UNLOCKED!</div>
-              <div className="text-lg">{newAchievement.title}</div>
+              <div className="text-2xl md:text-3xl mb-2 animate-bounce">{newAchievement.icon}</div>
+              <div className="text-xs md:text-sm uppercase tracking-wide">ACHIEVEMENT UNLOCKED!</div>
+              <div className="text-base md:text-lg">{newAchievement.title}</div>
               <div className="text-xs">{newAchievement.description}</div>
             </div>
           </div>
@@ -279,7 +279,7 @@ export default function ScrollSpeedTest() {
             <div 
               className="text-white font-bold mb-4 transition-all duration-150"
               style={{ 
-                fontSize: `${Math.min(getFontSize(currentSpeed), 120)}px`,
+                fontSize: `${Math.min(getFontSize(currentSpeed), window.innerWidth < 768 ? 80 : 120)}px`,
                 textShadow: '4px 4px 0px rgba(0,0,0,0.5)',
                 lineHeight: '1.1'
               }}
@@ -301,17 +301,30 @@ export default function ScrollSpeedTest() {
         <div className="bg-black/60 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-white text-center">
             <div>
-              <div className="text-lg font-bold text-yellow-400">{formatNumber(bestSpeed)}</div>
+              <div className="text-sm md:text-lg font-bold text-yellow-400">{formatNumber(bestSpeed)}</div>
               <div className="text-xs opacity-80">Best Speed</div>
             </div>
             <div>
-              <div className="text-lg font-bold text-blue-400">{formatNumber(Math.floor(totalScrolled))}</div>
+              <div className="text-sm md:text-lg font-bold text-blue-400">{formatNumber(Math.floor(totalScrolled))}</div>
               <div className="text-xs opacity-80">Total Pixels</div>
             </div>
             <div className="col-span-2 md:col-span-1">
-              <div className="text-lg font-bold text-green-400">{achievements.filter(a => a.unlocked).length}/{achievements.length}</div>
+              <div className="text-sm md:text-lg font-bold text-green-400">{achievements.filter(a => a.unlocked).length}/{achievements.length}</div>
               <div className="text-xs opacity-80">Achievements</div>
             </div>
+          </div>
+          
+          {/* Mobile achievements indicator */}
+          <div className="md:hidden mt-3 flex flex-wrap gap-1 justify-center">
+            {achievements.map((achievement, index) => (
+              <span 
+                key={index}
+                className={`text-lg ${achievement.unlocked ? 'opacity-100' : 'opacity-30'}`}
+                title={achievement.title}
+              >
+                {achievement.unlocked ? achievement.icon : '🔒'}
+              </span>
+            ))}
           </div>
           
           {/* Quick reset button */}
@@ -324,8 +337,8 @@ export default function ScrollSpeedTest() {
         </div>
       </div>
 
-      {/* Achievements list */}
-      <div className="fixed top-4 left-4 max-w-xs">
+      {/* Achievements list - Hidden on mobile to avoid overlap */}
+      <div className="hidden md:block fixed top-4 left-4 max-w-xs">
         <div className="bg-black/60 backdrop-blur-lg rounded-2xl p-4 border border-white/20">
           <h3 className="text-white font-bold mb-3 text-center">🏆 Achievements</h3>
           <div className="space-y-2">

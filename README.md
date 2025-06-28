@@ -4,11 +4,14 @@ A collection of playful, absurd, interactive micro-experiences inspired by Neal.
 
 ## 🎯 Features
 
-- **Click Me Forever** 👆 - A pointless counter that grows bigger with each click
-- **Annoying Typing Test** ⌨️ - Type sentences that change while you're typing (frustratingly fun!)
-- **Random Fact Parade** 🎪 - Endless stream of useless but interesting facts
+- **Earth's Heartbeat** 🌍 - Feel the pulse of our living planet in real-time
+- **Life in Weeks** 📅 - Visualize your entire life as 4,000 weeks
+- **Pointless Achievements** 🏆 - Feel validated for doing nothing important
+- **100 Indian Experiences** 🇮🇳 - Hilarious moments every Indian has lived through
+- **Year Progress Tracker** 📅 - Watch the current year slip away, second by second
+- **Scroll Speed Challenge** 🏃‍♂️ - Test how fast you can scroll and break speed records
+- **Snake with a Twist** 🐍 - Classic Snake game that gradually fades away as you play
 - **Virtual Bubble Wrap** 🫧 - Infinite bubble popping satisfaction with no waste
-- **Infinite Scroll of Nothing** 🌀 - Scroll through absurd thoughts and random content forever
 - **Custom 404 Page** 🍌 - With a dancing banana because why not?
 
 ## 🚀 Getting Started
@@ -32,16 +35,19 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ```
 src/
-├── app/                    # Next.js App Router pages
-│   ├── click-me/          # Click counter activity
-│   ├── annoying-typing/   # Typing test that changes sentences
-│   ├── random-facts/      # Random fact generator
-│   ├── bubble-wrap/       # Virtual bubble wrap popping
-│   ├── infinite-scroll/   # Infinite scroll of random content
-│   └── not-found.tsx      # Custom 404 page with dancing banana
-├── components/            # Reusable React components
-├── data/                  # Static data and configuration
-└── lib/                   # Utility functions
+├── app/                        # Next.js App Router pages
+│   ├── earths-heartbeat/      # Real-time global statistics
+│   ├── life-calendar/         # Life visualization in weeks
+│   ├── achievements/          # Pointless achievement system
+│   ├── indian-experiences/    # Relatable Indian moments
+│   ├── year-progress/         # Current year progress tracker
+│   ├── scroll-speed/          # Scroll speed challenge
+│   ├── snake-fade/            # Snake game with fading twist
+│   ├── bubble-wrap/           # Virtual bubble wrap popping
+│   └── not-found.tsx          # Custom 404 page with dancing banana
+├── components/                # Reusable React components
+├── data/                      # Static data and configuration
+└── lib/                       # Utility functions
 ```
 
 ## 🎨 Design Philosophy

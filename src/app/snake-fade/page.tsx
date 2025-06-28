@@ -11,6 +11,7 @@ export default function SnakeFade() {
   const [snakePositions, setSnakePositions] = useState([168, 169, 170, 171]);
   const [applePosition, setApplePosition] = useState(100);
   const [inputs, setInputs] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const tilesRef = useRef<(HTMLDivElement | null)[]>([]);
   const animationRef = useRef<number>();
@@ -394,7 +395,50 @@ export default function SnakeFade() {
     }
   }, [resetGame, startGame]);
 
+  // Mobile direction handler
+  const handleDirection = useCallback((direction: string) => {
+    const currentInputs = inputsRef.current;
+    const currentSnakePositions = snakePositionsRef.current;
+    
+    const getCurrentDirection = () => {
+      if (currentInputs.length > 0) return currentInputs[currentInputs.length - 1];
+      if (currentSnakePositions.length < 2) return 'right';
+      const head = currentSnakePositions[currentSnakePositions.length - 1];
+      const neck = currentSnakePositions[currentSnakePositions.length - 2];
+      if (head - 1 === neck) return 'right';
+      if (head + 1 === neck) return 'left';
+      if (head - width === neck) return 'down';
+      if (head + width === neck) return 'up';
+      return 'right';
+    };
+
+    const currentDirection = getCurrentDirection();
+    
+    // Only allow direction changes if game is not over
+    if (!gameOverRef.current) {
+      if (direction === 'left' && currentDirection !== 'left' && currentDirection !== 'right') {
+        inputsRef.current = [...currentInputs, 'left'];
+        setInputs(inputsRef.current);
+        if (!gameStartedRef.current) startGame();
+      } else if (direction === 'up' && currentDirection !== 'up' && currentDirection !== 'down') {
+        inputsRef.current = [...currentInputs, 'up'];
+        setInputs(inputsRef.current);
+        if (!gameStartedRef.current) startGame();
+      } else if (direction === 'right' && currentDirection !== 'right' && currentDirection !== 'left') {
+        inputsRef.current = [...currentInputs, 'right'];
+        setInputs(inputsRef.current);
+        if (!gameStartedRef.current) startGame();
+      } else if (direction === 'down' && currentDirection !== 'down' && currentDirection !== 'up') {
+        inputsRef.current = [...currentInputs, 'down'];
+        setInputs(inputsRef.current);
+        if (!gameStartedRef.current) startGame();
+      }
+    }
+  }, [startGame]);
+
   useEffect(() => {
+    // Detect mobile device
+    setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
     resetGame();
   }, [resetGame]);
 
@@ -409,7 +453,7 @@ export default function SnakeFade() {
   }, [handleKeyDown]);
 
   return (
-    <div className="h-screen overflow-hidden" style={{
+    <div className="h-screen overflow-hidden no-zoom" style={{
       background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%)',
       backgroundSize: '400% 400%',
       animation: 'gradientShift 10s ease infinite'
@@ -491,15 +535,85 @@ export default function SnakeFade() {
             </div>
           </div>
 
+          {/* Mobile Controls */}
+          {isMobile && (
+            <div className="mt-4 flex flex-col items-center">
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                <div></div>
+                <button
+                  onClick={() => handleDirection('up')}
+                  className="bg-black border-2 border-green-400 p-3 text-green-400 font-mono hover:bg-green-900 active:bg-green-800 touch-action-manipulation"
+                  style={{ boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)' }}
+                >
+                  ↑
+                </button>
+                <div></div>
+                <button
+                  onClick={() => handleDirection('left')}
+                  className="bg-black border-2 border-green-400 p-3 text-green-400 font-mono hover:bg-green-900 active:bg-green-800 touch-action-manipulation"
+                  style={{ boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)' }}
+                >
+                  ←
+                </button>
+                <div className="flex items-center justify-center">
+                  <div className="w-2 h-2 bg-green-400 rounded-full opacity-50"></div>
+                </div>
+                <button
+                  onClick={() => handleDirection('right')}
+                  className="bg-black border-2 border-green-400 p-3 text-green-400 font-mono hover:bg-green-900 active:bg-green-800 touch-action-manipulation"
+                  style={{ boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)' }}
+                >
+                  →
+                </button>
+                <div></div>
+                <button
+                  onClick={() => handleDirection('down')}
+                  className="bg-black border-2 border-green-400 p-3 text-green-400 font-mono hover:bg-green-900 active:bg-green-800 touch-action-manipulation"
+                  style={{ boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)' }}
+                >
+                  ↓
+                </button>
+                <div></div>
+              </div>
+
+              {/* Mobile Action Buttons */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    resetGame();
+                    setTimeout(startGame, 100);
+                  }}
+                  className="bg-black border-2 border-green-400 px-4 py-2 text-green-400 font-mono text-sm hover:bg-green-900 active:bg-green-800"
+                  style={{ boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)' }}
+                >
+                  RESTART
+                </button>
+                <button
+                  onClick={() => {
+                    hardModeRef.current = !hardModeRef.current;
+                    setHardMode(hardModeRef.current);
+                    resetGame();
+                  }}
+                  className="bg-black border-2 border-green-400 px-4 py-2 text-green-400 font-mono text-sm hover:bg-green-900 active:bg-green-800"
+                  style={{ boxShadow: '0 0 10px rgba(0, 255, 0, 0.3)' }}
+                >
+                  {hardMode ? 'EASY' : 'HARD'}
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Game Status Messages - Positioned over game */}
           {!gameStarted && !gameOver && (
             <div className="absolute inset-0 flex items-center justify-center z-20">
               <div className="bg-black border border-green-400 p-4 font-mono" style={{
                 boxShadow: '0 0 15px rgba(0, 255, 0, 0.3)'
               }}>
-                <p className="text-green-400 mb-2 text-base">> PRESS ARROW KEY OR SPACE TO START</p>
+                <p className="text-green-400 mb-2 text-base">
+                  {isMobile ? '> TAP DIRECTION BUTTON TO START' : '> PRESS ARROW KEY OR SPACE TO START'}
+                </p>
                 <p className="text-green-400 text-sm opacity-80">
-                  > PRESS H FOR HARD MODE
+                  {isMobile ? '> TAP HARD/EASY TO CHANGE MODE' : '> PRESS H FOR HARD MODE'}
                 </p>
               </div>
             </div>
@@ -511,11 +625,15 @@ export default function SnakeFade() {
                 boxShadow: '0 0 15px rgba(255, 0, 0, 0.3)'
               }}>
                 <p className="text-red-400 text-lg font-bold mb-2">> GAME TERMINATED</p>
-                <p className="text-red-400 mb-2 text-base">> PRESS SPACE TO RESTART</p>
+                <p className="text-red-400 mb-2 text-base">
+                  {isMobile ? '> TAP RESTART BUTTON' : '> PRESS SPACE TO RESTART'}
+                </p>
                 <p className="text-red-400 text-sm opacity-80">
-                  {hardMode 
-                    ? "> PRESS E FOR EASY MODE"
-                    : "> PRESS H FOR HARD MODE"
+                  {isMobile
+                    ? `> TAP ${hardMode ? 'EASY' : 'HARD'} FOR ${hardMode ? 'EASY' : 'HARD'} MODE`
+                    : hardMode 
+                      ? "> PRESS E FOR EASY MODE"
+                      : "> PRESS H FOR HARD MODE"
                   }
                 </p>
               </div>
@@ -535,6 +653,8 @@ export default function SnakeFade() {
         /* Prevent zoom on mobile */
         button {
           touch-action: manipulation;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
         }
         
         /* Mobile optimizations */
@@ -543,6 +663,25 @@ export default function SnakeFade() {
             padding-left: 0.5rem;
             padding-right: 0.5rem;
           }
+          
+          /* Larger touch targets for mobile */
+          button {
+            min-height: 44px;
+            min-width: 44px;
+          }
+          
+          /* Prevent text selection on mobile */
+          .font-mono {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+        }
+        
+        /* Prevent pinch zoom */
+        .no-zoom {
+          touch-action: pan-x pan-y;
         }
       `}</style>
     </div>

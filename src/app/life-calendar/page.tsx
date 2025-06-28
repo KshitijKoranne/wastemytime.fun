@@ -180,19 +180,40 @@ export default function LifeCalendar() {
     };
   }, [birthDate, livedWeeks, currentAge, historicalEvents]);
 
-  // Handle date selection
+  // Handle date selection with DD/MM/YYYY format
   const handleDateSelect = (dateString: string) => {
-    // Only process if we have a complete date (YYYY-MM-DD format)
-    if (dateString && dateString.length === 10 && dateString.includes('-')) {
-      const date = new Date(dateString);
-      // Validate that it's a real date and not in the future
-      if (!isNaN(date.getTime()) && date <= new Date()) {
-        setBirthDate(date);
-        const age = calculateAge(date);
-        setCurrentAge(age.years);
-        setLivedWeeks(age.weeks);
-        setShowDatePicker(false);
+    // Parse DD/MM/YYYY format
+    if (dateString && dateString.length === 10 && dateString.includes('/')) {
+      const [day, month, year] = dateString.split('/').map(num => parseInt(num));
+      
+      // Validate date components
+      if (day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= new Date().getFullYear()) {
+        const date = new Date(year, month - 1, day); // month is 0-indexed
+        
+        // Validate that the date is real (handles invalid dates like 31/02/2000)
+        if (date.getDate() === day && date.getMonth() === (month - 1) && date.getFullYear() === year && date <= new Date()) {
+          setBirthDate(date);
+          const age = calculateAge(date);
+          setCurrentAge(age.years);
+          setLivedWeeks(age.weeks);
+          setShowDatePicker(false);
+        }
       }
+    }
+  };
+
+  // Format date input as user types
+  const formatDateInput = (value: string): string => {
+    // Remove all non-numeric characters
+    const numbers = value.replace(/\D/g, '');
+    
+    // Format as DD/MM/YYYY
+    if (numbers.length <= 2) {
+      return numbers;
+    } else if (numbers.length <= 4) {
+      return `${numbers.slice(0, 2)}/${numbers.slice(2)}`;
+    } else {
+      return `${numbers.slice(0, 2)}/${numbers.slice(2, 4)}/${numbers.slice(4, 8)}`;
     }
   };
 
@@ -303,19 +324,41 @@ export default function LifeCalendar() {
             <p className="text-slate-300 mb-6 text-center">
               Unlock the timeline of your existence
             </p>
+            <div className="mb-4">
+              <label className="block text-slate-300 text-sm mb-2">
+                Enter your birth date (DD/MM/YYYY)
+              </label>
+              <input
+                type="text"
+                placeholder="25/12/1990"
+                className="w-full p-4 bg-slate-800 border-2 border-slate-600 text-white rounded-lg text-lg focus:border-slate-400 focus:outline-none"
+                maxLength={10}
+                onChange={(e) => {
+                  const formatted = formatDateInput(e.target.value);
+                  e.target.value = formatted;
+                }}
+                onKeyDown={(e) => {
+                  // Allow: backspace, delete, tab, escape, enter
+                  if ([8, 9, 27, 13, 46].indexOf(e.keyCode) !== -1 ||
+                      // Allow: Ctrl+A, Ctrl+C, Ctrl+V, Ctrl+X
+                      (e.keyCode === 65 && e.ctrlKey === true) ||
+                      (e.keyCode === 67 && e.ctrlKey === true) ||
+                      (e.keyCode === 86 && e.ctrlKey === true) ||
+                      (e.keyCode === 88 && e.ctrlKey === true)) {
+                    return;
+                  }
+                  // Ensure that it is a number and stop the keypress
+                  if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            </div>
             <form onSubmit={(e) => {
               e.preventDefault();
-              const formData = new FormData(e.target as HTMLFormElement);
-              const dateValue = formData.get('birthDate') as string;
-              handleDateSelect(dateValue);
+              const input = e.currentTarget.querySelector('input[type="text"]') as HTMLInputElement;
+              handleDateSelect(input.value);
             }}>
-              <input
-                name="birthDate"
-                type="date"
-                className="w-full p-4 bg-slate-800 border-2 border-slate-600 text-white rounded-lg text-lg focus:border-slate-400 focus:outline-none mb-4"
-                max={new Date().toISOString().split('T')[0]}
-                required
-              />
               <button
                 type="submit"
                 className="w-full p-4 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-lg font-medium transition-all mb-3 border border-slate-500"
