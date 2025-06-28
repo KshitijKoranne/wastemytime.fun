@@ -39,8 +39,14 @@ export default function Home() {
             Waste My Time
           </h1>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed px-4">
-            A collection of playful, interactive micro-experiences to capture your curiosity
+            A collection of playful, interactive micro-experiences to capture your curiosity and inspire awe
           </p>
+          <div className="mt-6 text-sm text-gray-500 max-w-3xl mx-auto px-4">
+            <p>
+              Discover amazing data visualizations, real-time global statistics, life timeline explorations, 
+              and creative experiments that make you think differently about time, perspective, and existence.
+            </p>
+          </div>
         </header>
 
         {/* Activities grid */}

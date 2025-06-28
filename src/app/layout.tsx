@@ -25,12 +25,13 @@ const fredoka = Fredoka({
 
 export const metadata: Metadata = {
   title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
-  description: "Discover hilarious interactive games and time-wasting activities! Click counters, bubble wrap, Indian mom chatbot, procrastination calculator & more fun experiments.",
+  description: "Discover amazing interactive experiences and time-wasting activities! Life visualizations, Earth's heartbeat, achievements, scroll challenges & more awe-inspiring experiments.",
   keywords: [
+    "life visualization", "earth statistics", "interactive timeline", "global data", "life calendar",
     "time waster games", "fun interactive activities", "browser games", "procrastination", 
-    "bubble wrap popping", "click counter", "indian mom chatbot", "funny games",
     "stress relief games", "entertainment", "neal.fun alternatives", "pointless websites",
-    "interactive experiments", "online time killers", "casual games", "humor"
+    "interactive experiments", "online time killers", "casual games", "awe inspiring",
+    "real time data", "personal insights", "data visualization", "creative activities"
   ],
   authors: [{ name: "Waste My Time" }],
   creator: "Waste My Time",
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
-    description: "Discover hilarious interactive games and time-wasting activities! Click counters, bubble wrap, Indian mom chatbot, procrastination calculator & more.",
+    description: "Discover amazing interactive experiences! Life visualizations, Earth's heartbeat, achievements, scroll challenges & more awe-inspiring experiments.",
     url: "https://wastemytime.fun",
     siteName: "Waste My Time",
     type: "website",
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
-    description: "Discover hilarious interactive games and time-wasting activities! Click counters, bubble wrap, Indian mom chatbot & more.",
+    description: "Discover amazing interactive experiences! Life visualizations, Earth's heartbeat, achievements & more awe-inspiring experiments.",
     images: ["/og-image.png"],
   },
   robots: {
@@ -104,28 +105,51 @@ export default function RootLayout({
     },
     "mainEntity": [
       {
-        "@type": "Game",
-        "name": "Click Me Forever",
-        "url": "https://wastemytime.fun/click-me",
-        "description": "Infinite click counter game with motivational messages"
-      },
-      {
-        "@type": "Game", 
-        "name": "Virtual Bubble Wrap",
-        "url": "https://wastemytime.fun/bubble-wrap",
-        "description": "Stress relief bubble popping game"
+        "@type": "SoftwareApplication",
+        "name": "Earth's Heartbeat",
+        "url": "https://wastemytime.fun/earths-heartbeat",
+        "description": "Feel the pulse of our living planet with real-time global statistics",
+        "applicationCategory": "DataVisualization",
+        "operatingSystem": "Web Browser"
       },
       {
         "@type": "SoftwareApplication",
-        "name": "Procrastination Calculator",
-        "url": "https://wastemytime.fun/procrastination-calculator",
-        "description": "Generate creative excuses to avoid tasks"
+        "name": "Life in Weeks",
+        "url": "https://wastemytime.fun/life-calendar",
+        "description": "Visualize your entire life as 4,000 interactive weeks with AI insights",
+        "applicationCategory": "DataVisualization",
+        "operatingSystem": "Web Browser"
       },
       {
         "@type": "Game",
-        "name": "Indian Mom GPT",
-        "url": "https://wastemytime.fun/indian-mom-gpt", 
-        "description": "Chat with a hilarious virtual Indian mom"
+        "name": "Pointless Achievements",
+        "url": "https://wastemytime.fun/achievements",
+        "description": "Feel validated for doing nothing important with silly achievements"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "100 Indian Experiences",
+        "url": "https://wastemytime.fun/indian-experiences",
+        "description": "Hilarious moments every Indian has lived through",
+        "applicationCategory": "Entertainment"
+      },
+      {
+        "@type": "Game",
+        "name": "Year Progress Tracker",
+        "url": "https://wastemytime.fun/year-progress",
+        "description": "Watch the current year slip away, second by second"
+      },
+      {
+        "@type": "Game",
+        "name": "Scroll Speed Challenge",
+        "url": "https://wastemytime.fun/scroll-speed",
+        "description": "Test how fast you can scroll and break speed records"
+      },
+      {
+        "@type": "Game",
+        "name": "Snake with a Twist",
+        "url": "https://wastemytime.fun/snake-fade",
+        "description": "Classic Snake game that gradually fades away as you play"
       }
     ]
   };
