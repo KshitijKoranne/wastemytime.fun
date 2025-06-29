@@ -10,6 +10,15 @@ export interface Activity {
 
 export const activities: Activity[] = [
   {
+    id: 'indian-mom-gpt',
+    title: 'Indian Mom GPT',
+    description: 'Chat with an AI that perfectly captures your Indian mom\'s energy',
+    emoji: '👩‍👧‍👦',
+    path: '/indian-mom-gpt',
+    color: 'bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100 hover:from-rose-200 hover:via-pink-100 hover:to-orange-200 border-rose-300 shadow-md hover:shadow-lg',
+    image: '/images/mom-gpt.png'
+  },
+  {
     id: 'earths-heartbeat',
     title: "Earth's Heartbeat",
     description: 'Feel the pulse of our living planet in real-time',

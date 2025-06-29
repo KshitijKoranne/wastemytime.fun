@@ -30,6 +30,7 @@ interface AIInsight {
 export default function LifeCalendar() {
   const [birthDate, setBirthDate] = useState<Date | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(true);
+  const [inputValue, setInputValue] = useState('');
   const [selectedWeek, setSelectedWeek] = useState<WeekInfo | null>(null);
   const [currentAge, setCurrentAge] = useState<number>(0);
   const [livedWeeks, setLivedWeeks] = useState<number>(0);
@@ -182,23 +183,35 @@ export default function LifeCalendar() {
 
   // Handle date selection with DD/MM/YYYY format
   const handleDateSelect = (dateString: string) => {
+    console.log('handleDateSelect called with:', dateString);
+    
     // Parse DD/MM/YYYY format
     if (dateString && dateString.length === 10 && dateString.includes('/')) {
       const [day, month, year] = dateString.split('/').map(num => parseInt(num));
+      console.log('Parsed date components:', { day, month, year });
       
       // Validate date components
       if (day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900 && year <= new Date().getFullYear()) {
         const date = new Date(year, month - 1, day); // month is 0-indexed
+        console.log('Created date object:', date);
         
         // Validate that the date is real (handles invalid dates like 31/02/2000)
         if (date.getDate() === day && date.getMonth() === (month - 1) && date.getFullYear() === year && date <= new Date()) {
+          console.log('Date validation passed, setting birth date');
           setBirthDate(date);
           const age = calculateAge(date);
           setCurrentAge(age.years);
           setLivedWeeks(age.weeks);
           setShowDatePicker(false);
+          console.log('Timeline creation completed');
+        } else {
+          console.log('Date validation failed');
         }
+      } else {
+        console.log('Date component validation failed');
       }
+    } else {
+      console.log('Date format validation failed');
     }
   };
 
@@ -331,11 +344,12 @@ export default function LifeCalendar() {
               <input
                 type="text"
                 placeholder="25/12/1990"
+                value={inputValue}
                 className="w-full p-4 bg-slate-800 border-2 border-slate-600 text-white rounded-lg text-lg focus:border-slate-400 focus:outline-none"
                 maxLength={10}
                 onChange={(e) => {
                   const formatted = formatDateInput(e.target.value);
-                  e.target.value = formatted;
+                  setInputValue(formatted);
                 }}
                 onKeyDown={(e) => {
                   // Allow: backspace, delete, tab, escape, enter
@@ -356,8 +370,12 @@ export default function LifeCalendar() {
             </div>
             <form onSubmit={(e) => {
               e.preventDefault();
-              const input = e.currentTarget.querySelector('input[type="text"]') as HTMLInputElement;
-              handleDateSelect(input.value);
+              if (inputValue.trim()) {
+                console.log('Submitting date:', inputValue.trim());
+                handleDateSelect(inputValue.trim());
+              } else {
+                console.log('Input value is empty:', inputValue);
+              }
             }}>
               <button
                 type="submit"
@@ -369,12 +387,6 @@ export default function LifeCalendar() {
                 ⏳ Create My Timeline
               </button>
             </form>
-            <button
-              onClick={() => setShowDatePicker(false)}
-              className="w-full p-3 text-slate-400 hover:text-slate-200 transition-colors"
-            >
-              Explore anonymously
-            </button>
           </div>
         </div>
       )}

@@ -63,7 +63,7 @@ export default function Home() {
                   }
                 }}
               >
-                <div className="bg-white border-2 border-gray-200 rounded-xl p-4 flex flex-row items-center text-left hover:border-black hover:bg-gray-50 transition-all duration-200 group-hover:scale-105 relative w-full h-32">
+                <div className={`${activity.color || 'bg-white'} border-2 border-gray-200 rounded-xl p-4 flex flex-row items-center text-left hover:border-black transition-all duration-200 group-hover:scale-105 relative w-full h-32`}>
                   {activity.id === 'snake-fade' ? (
                     /* Snake game tile - image fills entire rectangle */
                     <div className="absolute inset-0 rounded-xl overflow-hidden">
@@ -129,6 +129,16 @@ export default function Home() {
                         alt="Earth's Heartbeat"
                         className="w-full h-full object-cover"
                       />
+                    </div>
+                  ) : activity.id === 'indian-mom-gpt' ? (
+                    /* Indian Mom GPT tile - image with gradient overlay */
+                    <div className="absolute inset-0 rounded-xl overflow-hidden">
+                      <img 
+                        src="/images/mom-gpt.png" 
+                        alt="Indian Mom GPT"
+                        className="w-full h-full object-cover opacity-90"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-rose-200/30 via-pink-100/20 to-orange-200/30 mix-blend-overlay"></div>
                     </div>
                   ) : (
                     /* Other activities - horizontal layout */
@@ -172,7 +182,7 @@ export default function Home() {
                   }
                 }}
               >
-                <div className="bg-white border-2 border-gray-200 rounded-xl p-4 flex flex-row items-center text-left hover:border-black hover:bg-gray-50 transition-all duration-200 group-hover:scale-105 relative" style={{ width: '416px', height: '157px' }}>
+                <div className={`${activity.color || 'bg-white'} border-2 border-gray-200 rounded-xl p-4 flex flex-row items-center text-left hover:border-black transition-all duration-200 group-hover:scale-105 relative`} style={{ width: '416px', height: '157px' }}>
                   {activity.id === 'snake-fade' ? (
                     /* Snake game tile - image fills entire rectangle */
                     <div className="absolute inset-0 rounded-xl overflow-hidden">
@@ -238,6 +248,16 @@ export default function Home() {
                         alt="Earth's Heartbeat"
                         className="w-full h-full object-cover"
                       />
+                    </div>
+                  ) : activity.id === 'indian-mom-gpt' ? (
+                    /* Indian Mom GPT tile - image with gradient overlay */
+                    <div className="absolute inset-0 rounded-xl overflow-hidden">
+                      <img 
+                        src="/images/mom-gpt.png" 
+                        alt="Indian Mom GPT"
+                        className="w-full h-full object-cover opacity-90"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-br from-rose-200/30 via-pink-100/20 to-orange-200/30 mix-blend-overlay"></div>
                     </div>
                   ) : (
                     /* Other activities - horizontal layout */
