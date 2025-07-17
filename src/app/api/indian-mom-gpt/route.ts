@@ -98,7 +98,7 @@ Reply as mom (no other text):`;
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.VERCEL_URL || 'http://localhost:3000',
+        'HTTP-Referer': process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL || 'https://wastemytime.fun',
         'X-Title': 'Waste My Time - Indian Mom GPT'
       },
       body: JSON.stringify({

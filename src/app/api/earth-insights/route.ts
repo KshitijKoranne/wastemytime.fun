@@ -70,7 +70,7 @@ Keep each section warm, enlightening, and awe-inspiring. Focus on scale, connect
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.VERCEL_URL || 'http://localhost:3000',
+        'HTTP-Referer': process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL || 'https://wastemytime.fun',
         'X-Title': 'Waste My Time - Earth\'s Heartbeat'
       },
       body: JSON.stringify({

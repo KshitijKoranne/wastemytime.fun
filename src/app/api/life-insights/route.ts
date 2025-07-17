@@ -81,12 +81,21 @@ Keep the tone warm, insightful, and personally meaningful. Focus on helping the 
     }
 
     // Call OpenRouter API
+    console.log('Making OpenRouter API call with:', {
+      model: 'meta-llama/llama-3.1-8b-instruct:free',
+      weekNumber,
+      userAge,
+      lifeStage,
+      insightType,
+      apiKeyExists: !!apiKey
+    });
+    
     const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.VERCEL_URL || 'http://localhost:3000',
+        'HTTP-Referer': process.env.VERCEL_URL || process.env.NEXT_PUBLIC_VERCEL_URL || 'https://wastemytime.fun',
         'X-Title': 'Waste My Time - Life Calendar'
       },
       body: JSON.stringify({
@@ -105,9 +114,14 @@ Keep the tone warm, insightful, and personally meaningful. Focus on helping the 
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('OpenRouter API error:', errorText);
+      console.error('OpenRouter API error:', {
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries()),
+        body: errorText
+      });
       return NextResponse.json(
-        { error: 'Failed to generate insights' },
+        { error: `Failed to generate insights: ${response.status} ${response.statusText}` },
         { status: 500 }
       );
     }
