@@ -14,7 +14,8 @@
       "Bash(cp:*)",
       "WebFetch(domain:neal.fun)",
       "WebFetch(domain:openrouter.ai)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

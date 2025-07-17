@@ -1,18 +1,62 @@
 # 🎪 wastemytime.fun
 
-A collection of playful, absurd, interactive micro-experiences inspired by Neal.fun that capture your curiosity and hold your attention.
+A collection of playful, interactive micro-experiences inspired by Neal.fun that capture curiosity and provide awe-inspiring entertainment. The website features various time-wasting activities designed to be engaging, educational, and fun.
 
-## 🎯 Features
+## 🌐 Live Website: [https://wastemytime.fun](https://wastemytime.fun)
 
-- **Earth's Heartbeat** 🌍 - Feel the pulse of our living planet in real-time
-- **Life in Weeks** 📅 - Visualize your entire life as 4,000 weeks
-- **Pointless Achievements** 🏆 - Feel validated for doing nothing important
-- **100 Indian Experiences** 🇮🇳 - Hilarious moments every Indian has lived through
-- **Year Progress Tracker** 📅 - Watch the current year slip away, second by second
-- **Scroll Speed Challenge** 🏃‍♂️ - Test how fast you can scroll and break speed records
-- **Snake with a Twist** 🐍 - Classic Snake game that gradually fades away as you play
-- **Virtual Bubble Wrap** 🫧 - Infinite bubble popping satisfaction with no waste
-- **Custom 404 Page** 🍌 - With a dancing banana because why not?
+## 🎯 Interactive Activities
+
+### 🤖 **Indian Mom GPT** (Latest Feature)
+- **AI-powered chatbot** that perfectly mimics Indian mom behavior
+- **Samsung Galaxy S24 mockup** design for authentic mobile experience
+- **Multiple mood states**: Disappointed, proud, worried, roast, nostalgic
+- **Time-aware responses**: Different reactions based on time of day
+- **Authentic Indian phrases**: Mix of English/Hindi, typical mom concerns
+- **WhatsApp-style UI**: Realistic chat interface with typing indicators
+
+### 🎨 **Pantone Color Journey** (New!)
+- **Complete Timeline**: 25 years of Pantone Colors (2000-2024) with authentic hex codes
+- **Rich Historical Context**: Each color includes cultural significance and fun facts
+- **Smooth Scroll Animation**: IntersectionObserver-based animations
+- **Interactive Design**: Hover effects, color-themed cards, and dynamic contrast text
+- **Cultural Learning**: Discover how colors reflect societal moods and trends
+
+### 🌍 **Earth's Heartbeat**
+- **Real-time global statistics** (births, deaths, CO2 emissions, etc.)
+- **AI-powered insights** providing meaningful context to the numbers
+- **Cosmic-themed UI** with animated backgrounds
+
+### 📅 **Life in Weeks**
+- **Life visualization** as 4,000 interactive weeks grid
+- **Personal timeline** based on birth date input
+- **AI insights** for different life stages and historical context
+- **Interactive week selection** with detailed information
+
+### 🏆 **Pointless Achievements**
+- **Gaming-style achievements** for everyday mundane activities
+- **Humorous validation** for doing nothing important
+- **Retro gaming aesthetic**
+
+### 🇮🇳 **100 Indian Experiences**
+- **Cultural moments** every Indian has lived through
+- **Nostalgic content** with authentic Indian scenarios
+- **Orange-themed** Indian cultural design
+
+### 📅 **Year Progress Tracker**
+- **Real-time year progress** visualization
+- **Purple gradient theme** with animated progress bars
+
+### 🏃‍♂️ **Scroll Speed Challenge**
+- **Interactive speed testing** for scrolling abilities
+- **Colorful animated** progress tracking
+
+### 🐍 **Snake with a Twist**
+- **Classic snake game** that gradually fades as you play
+- **Retro gaming experience** with a unique twist
+
+### 🫧 **Virtual Bubble Wrap**
+- **Infinite bubble popping** satisfaction with no waste
+- **Realistic sound effects** and visual feedback
 
 ## 🚀 Getting Started
 
@@ -26,29 +70,49 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## 🛠️ Tech Stack
 
-- **Next.js 15** - React framework with App Router
-- **TypeScript** - Type safety and better developer experience
-- **Tailwind CSS** - Utility-first CSS framework for styling
-- **Vercel** - Deployment platform
+- **Framework**: Next.js 15.3.3 (React 19)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **AI Integration**: OpenRouter API (Mistral Small 3.2-24B)
+- **Deployment**: Vercel
+- **Package Manager**: npm
 
 ## 📁 Project Structure
 
 ```
 src/
-├── app/                        # Next.js App Router pages
-│   ├── earths-heartbeat/      # Real-time global statistics
-│   ├── life-calendar/         # Life visualization in weeks
-│   ├── achievements/          # Pointless achievement system
-│   ├── indian-experiences/    # Relatable Indian moments
-│   ├── year-progress/         # Current year progress tracker
-│   ├── scroll-speed/          # Scroll speed challenge
-│   ├── snake-fade/            # Snake game with fading twist
-│   ├── bubble-wrap/           # Virtual bubble wrap popping
-│   └── not-found.tsx          # Custom 404 page with dancing banana
-├── components/                # Reusable React components
-├── data/                      # Static data and configuration
-└── lib/                       # Utility functions
+├── app/                          # Next.js App Router
+│   ├── api/                     # API routes
+│   │   ├── earth-insights/      # Earth's Heartbeat AI insights
+│   │   ├── life-insights/       # Life Calendar AI insights
+│   │   └── indian-mom-gpt/      # Indian Mom GPT chatbot
+│   ├── achievements/            # Pointless achievements game
+│   ├── bubble-wrap/            # Virtual bubble wrap popping
+│   ├── earths-heartbeat/       # Real-time global statistics
+│   ├── indian-experiences/     # 100 Indian cultural moments
+│   ├── indian-mom-gpt/         # AI Indian mom chatbot
+│   ├── life-calendar/          # Life visualization as weeks
+│   ├── pantone-timeline/       # Pantone Color Journey timeline
+│   ├── progress-bar/           # Interactive progress visualizations
+│   ├── scroll-speed/           # Scroll speed testing game
+│   ├── snake-fade/             # Fading snake game
+│   ├── year-progress/          # Current year progress tracker
+│   ├── layout.tsx              # Root layout with navbar
+│   └── page.tsx                # Homepage with activity grid
+├── components/
+│   └── Navbar.tsx              # Dynamic themed navigation
+├── data/
+│   └── activities.ts           # Activity definitions and metadata
+└── lib/                        # Utilities and helpers
 ```
+
+## 🤖 AI Integration
+
+- **OpenRouter API** with Mistral Small 3.2-24B model
+- **Context-aware responses** for different activities
+- **Mood-based interactions** (especially in Indian Mom GPT)
+- **Time-sensitive behavior** for realistic experiences
+- **Fallback systems** for when AI is unavailable
 
 ## 🎨 Design Philosophy
 
