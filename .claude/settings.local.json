@@ -12,7 +12,9 @@
       "Bash(find:*)",
       "Bash(npm run build:*)",
       "Bash(cp:*)",
-      "WebFetch(domain:neal.fun)"
+      "WebFetch(domain:neal.fun)",
+      "WebFetch(domain:openrouter.ai)",
+      "Bash(pkill:*)"
     ],
     "deny": []
   }

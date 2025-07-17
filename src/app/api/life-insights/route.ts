@@ -82,7 +82,7 @@ Keep the tone warm, insightful, and personally meaningful. Focus on helping the 
 
     // Call OpenRouter API
     console.log('Making OpenRouter API call with:', {
-      model: 'meta-llama/llama-3.1-8b-instruct:free',
+      model: 'mistralai/mistral-small-3.2-24b-instruct:free',
       weekNumber,
       userAge,
       lifeStage,
@@ -99,7 +99,7 @@ Keep the tone warm, insightful, and personally meaningful. Focus on helping the 
         'X-Title': 'Waste My Time - Life Calendar'
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.1-8b-instruct:free',
+        model: 'mistralai/mistral-small-3.2-24b-instruct:free',
         messages: [
           {
             role: 'user',

@@ -74,7 +74,7 @@ Keep each section warm, enlightening, and awe-inspiring. Focus on scale, connect
         'X-Title': 'Waste My Time - Earth\'s Heartbeat'
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.1-8b-instruct:free',
+        model: 'mistralai/mistral-small-3.2-24b-instruct:free',
         messages: [
           {
             role: 'user',
