@@ -76,12 +76,4 @@ export const activities: Activity[] = [
     path: '/snake-fade',
     color: 'bg-indigo-100 hover:bg-indigo-200 border-indigo-300'
   },
-  {
-    id: 'pantone-timeline',
-    title: 'Pantone Color Journey',
-    description: 'Explore 25 years of Pantone Colors with cultural stories',
-    emoji: '🎨',
-    path: '/pantone-timeline',
-    color: 'bg-gradient-to-br from-purple-100 via-pink-50 to-violet-100 hover:from-purple-200 hover:via-pink-100 hover:to-violet-200 border-purple-300 shadow-md hover:shadow-lg'
-  },
 ];

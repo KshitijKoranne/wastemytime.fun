@@ -14,12 +14,6 @@ A collection of playful, interactive micro-experiences inspired by Neal.fun that
 - **Authentic Indian phrases**: Mix of English/Hindi, typical mom concerns
 - **WhatsApp-style UI**: Realistic chat interface with typing indicators
 
-### 🎨 **Pantone Color Journey** (New!)
-- **Complete Timeline**: 25 years of Pantone Colors (2000-2024) with authentic hex codes
-- **Rich Historical Context**: Each color includes cultural significance and fun facts
-- **Smooth Scroll Animation**: IntersectionObserver-based animations
-- **Interactive Design**: Hover effects, color-themed cards, and dynamic contrast text
-- **Cultural Learning**: Discover how colors reflect societal moods and trends
 
 ### 🌍 **Earth's Heartbeat**
 - **Real-time global statistics** (births, deaths, CO2 emissions, etc.)
@@ -92,7 +86,6 @@ src/
 │   ├── indian-experiences/     # 100 Indian cultural moments
 │   ├── indian-mom-gpt/         # AI Indian mom chatbot
 │   ├── life-calendar/          # Life visualization as weeks
-│   ├── pantone-timeline/       # Pantone Color Journey timeline
 │   ├── progress-bar/           # Interactive progress visualizations
 │   ├── scroll-speed/           # Scroll speed testing game
 │   ├── snake-fade/             # Fading snake game
