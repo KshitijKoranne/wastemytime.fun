@@ -1,172 +1,81 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Dancing_Script, Fredoka } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
+  axes: ["opsz", "SOFT", "WONK"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const dancingScript = Dancing_Script({
-  variable: "--font-dancing-script",
-  subsets: ["latin"],
-});
-
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
-  description: "Discover amazing interactive experiences and time-wasting activities! Life visualizations, Earth's heartbeat, achievements, scroll challenges & more awe-inspiring experiments.",
+  title: "Waste My Time",
+  description: "Three genuinely fun things to do with your afternoon.",
   keywords: [
-    "life visualization", "earth statistics", "interactive timeline", "global data", "life calendar",
-    "time waster games", "fun interactive activities", "browser games", "procrastination", 
-    "stress relief games", "entertainment", "neal.fun alternatives", "pointless websites",
-    "interactive experiments", "online time killers", "casual games", "awe inspiring",
-    "real time data", "personal insights", "data visualization", "creative activities"
+    "sharma ji ka beta", "indian childhood", "overthinking", "fun indian website",
+    "indian meme", "procrastination", "interactive", "neal.fun", "time waster"
   ],
   authors: [{ name: "Waste My Time" }],
-  creator: "Waste My Time",
-  publisher: "Waste My Time",
-  applicationName: "Waste My Time",
-  category: "Entertainment",
-  classification: "Interactive Games and Activities",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL('https://wastemytime.fun'),
-  alternates: {
-    canonical: 'https://wastemytime.fun',
-  },
+  metadataBase: new URL("https://wastemytime.fun"),
+  alternates: { canonical: "https://wastemytime.fun" },
   openGraph: {
-    title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
-    description: "Discover amazing interactive experiences! Life visualizations, Earth's heartbeat, achievements, scroll challenges & more awe-inspiring experiments.",
+    title: "Waste My Time",
+    description: "Three genuinely fun things to do with your afternoon.",
     url: "https://wastemytime.fun",
     siteName: "Waste My Time",
     type: "website",
-    locale: "en_US",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Waste My Time - Fun Interactive Games",
-      },
-    ],
+    locale: "en_IN",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Waste My Time" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Waste My Time - Fun Interactive Games & Time Wasting Activities",
-    description: "Discover amazing interactive experiences! Life visualizations, Earth's heartbeat, achievements & more awe-inspiring experiments.",
+    title: "Waste My Time",
+    description: "Three genuinely fun things to do with your afternoon.",
     images: ["/og-image.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: process.env.GOOGLE_VERIFICATION,
-  },
+  robots: { index: true, follow: true },
+  verification: { google: process.env.GOOGLE_VERIFICATION },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Waste My Time",
     "url": "https://wastemytime.fun",
-    "description": "A collection of playful, absurd, interactive micro-experiences that capture your curiosity and hold your attention",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Waste My Time"
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://wastemytime.fun/?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    },
+    "description": "Three genuinely fun interactive experiences.",
     "mainEntity": [
       {
-        "@type": "SoftwareApplication",
-        "name": "Earth's Heartbeat",
-        "url": "https://wastemytime.fun/earths-heartbeat",
-        "description": "Feel the pulse of our living planet with real-time global statistics",
-        "applicationCategory": "DataVisualization",
-        "operatingSystem": "Web Browser"
-      },
-      {
-        "@type": "SoftwareApplication",
-        "name": "Life in Weeks",
-        "url": "https://wastemytime.fun/life-calendar",
-        "description": "Visualize your entire life as 4,000 interactive weeks with AI insights",
-        "applicationCategory": "DataVisualization",
-        "operatingSystem": "Web Browser"
+        "@type": "Game",
+        "name": "Sharma Ji Ka Beta",
+        "url": "https://wastemytime.fun/sharma-ji-ka-beta",
+        "description": "Benchmark yourself against the mythical Sharma Ji Ka Beta",
       },
       {
         "@type": "Game",
-        "name": "Pointless Achievements",
-        "url": "https://wastemytime.fun/achievements",
-        "description": "Feel validated for doing nothing important with silly achievements"
+        "name": "Indian Childhood Score",
+        "url": "https://wastemytime.fun/indian-childhood-score",
+        "description": "Check off Indian childhood experiences and see your score",
       },
       {
         "@type": "SoftwareApplication",
-        "name": "100 Indian Experiences",
-        "url": "https://wastemytime.fun/indian-experiences",
-        "description": "Hilarious moments every Indian has lived through",
-        "applicationCategory": "Entertainment"
+        "name": "The Overthinking Spiral",
+        "url": "https://wastemytime.fun/overthinking-spiral",
+        "description": "Type a worry and watch it spiral into absurdity",
       },
-      {
-        "@type": "Game",
-        "name": "Year Progress Tracker",
-        "url": "https://wastemytime.fun/year-progress",
-        "description": "Watch the current year slip away, second by second"
-      },
-      {
-        "@type": "Game",
-        "name": "Scroll Speed Challenge",
-        "url": "https://wastemytime.fun/scroll-speed",
-        "description": "Test how fast you can scroll and break speed records"
-      },
-      {
-        "@type": "Game",
-        "name": "Snake with a Twist",
-        "url": "https://wastemytime.fun/snake-fade",
-        "description": "Classic Snake game that gradually fades away as you play"
-      }
-    ]
+    ],
   };
 
   return (
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="SIhSFzG-_wB5brnoEV_CRi-ovHUfjB-lJ9ziBDyJYeQ" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="bingbot" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-        <link rel="canonical" href="https://wastemytime.fun" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -177,10 +86,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${dancingScript.variable} ${fredoka.variable} antialiased`}
-      >
-        <Navbar />
+      <body className={`${fraunces.variable} ${inter.variable}`}>
         {children}
       </body>
     </html>

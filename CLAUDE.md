@@ -10,6 +10,7 @@ A collection of playful, interactive micro-experiences inspired by Neal.fun that
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS v4
 - **AI Integration**: OpenRouter API (Meta LLaMA 3.1-8B)
+- **Logo API**: Logo.dev API for brand logos
 - **Deployment**: Vercel
 - **Package Manager**: npm
 
@@ -24,6 +25,7 @@ src/
 │   ├── achievements/            # Pointless achievements game
 │   ├── bubble-wrap/            # Virtual bubble wrap popping
 │   ├── earths-heartbeat/       # Real-time global statistics
+│   ├── guess-the-logo/         # Brand logo guessing game
 │   ├── indian-experiences/     # 100 Indian cultural moments
 │   ├── indian-mom-gpt/         # AI Indian mom chatbot
 │   ├── life-calendar/          # Life visualization as weeks
@@ -42,7 +44,20 @@ src/
 
 ## 🎮 Interactive Activities
 
-### 1. **Indian Mom GPT** (Latest Feature)
+### 1. **Guess the Logo** (Latest Feature)
+- **100+ global brand logos** using Logo.dev API integration
+- **Progressive difficulty** from easy (Facebook, Google) to expert (luxury brands)
+- **Hilarious wrong answers** like "McSadness", "BookFace", "iBite"
+- **3 lives system** with ❤️ → 💔 visual feedback
+- **Streak tracking** with celebrations and fire emojis
+- **Easter egg surprises** with fake mystery logos (1 in 20 chance)
+- **Personality results** based on performance (Logo Wizard to Living Under a Rock)
+- **Social sharing** with auto-generated personality-based messages
+- **Smooth logo reveal animations** with scaling and opacity effects
+- **Global brand coverage** including Indian, American, European, and Asian companies
+- **Clean emerald green theme** with unique navbar styling
+
+### 2. **Indian Mom GPT**
 - **AI-powered chatbot** that perfectly mimics Indian mom behavior
 - **Samsung Galaxy S24 mockup** design for authentic mobile experience
 - **Multiple mood states**: Disappointed, proud, worried, roast, nostalgic
@@ -50,36 +65,36 @@ src/
 - **Authentic Indian phrases**: Mix of English/Hindi, typical mom concerns
 - **WhatsApp-style UI**: Realistic chat interface with typing indicators
 
-### 2. **Earth's Heartbeat**
+### 3. **Earth's Heartbeat**
 - **Real-time global statistics** (births, deaths, CO2 emissions, etc.)
 - **AI-powered insights** providing meaningful context to the numbers
 - **Cosmic-themed UI** with animated backgrounds
 
-### 3. **Life in Weeks**
+### 4. **Life in Weeks**
 - **Life visualization** as 4,000 interactive weeks grid
 - **Personal timeline** based on birth date input
 - **AI insights** for different life stages and historical context
 - **Interactive week selection** with detailed information
 
-### 4. **Pointless Achievements**
+### 5. **Pointless Achievements**
 - **Gaming-style achievements** for everyday mundane activities
 - **Humorous validation** for doing nothing important
 - **Retro gaming aesthetic**
 
-### 5. **100 Indian Experiences**
+### 6. **100 Indian Experiences**
 - **Cultural moments** every Indian has lived through
 - **Nostalgic content** with authentic Indian scenarios
 - **Orange-themed** Indian cultural design
 
-### 6. **Year Progress Tracker**
+### 7. **Year Progress Tracker**
 - **Real-time year progress** visualization
 - **Purple gradient theme** with animated progress bars
 
-### 7. **Scroll Speed Challenge**
+### 8. **Scroll Speed Challenge**
 - **Interactive speed testing** for scrolling abilities
 - **Colorful animated** progress tracking
 
-### 8. **Snake with a Twist**
+### 9. **Snake with a Twist**
 - **Classic snake game** that gradually fades as you play
 - **Retro gaming experience** with a unique twist
 
@@ -139,6 +154,7 @@ src/
 - **Caching strategies** for AI responses
 
 ## 🎨 Current Themes
+- **Guess the Logo**: Clean emerald green gradient with white accents
 - **Indian Mom GPT**: Rose/pink gradient with hearts motif
 - **Earth's Heartbeat**: Cosmic blue with space elements
 - **Life Calendar**: Slate/gray minimalist design

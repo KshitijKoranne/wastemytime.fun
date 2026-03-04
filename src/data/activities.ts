@@ -1,79 +1,62 @@
 export interface Activity {
   id: string;
   title: string;
-  description: string;
-  emoji: string;
+  tagline: string;
   path: string;
-  color: string;
+  bg: string;
+  text: string;
+  shape: "bars" | "checklist" | "spiral" | "circle" | "dots";
   image?: string;
 }
 
 export const activities: Activity[] = [
   {
-    id: 'indian-mom-gpt',
-    title: 'Indian Mom GPT',
-    description: 'Chat with an AI that perfectly captures your Indian mom\'s energy',
-    emoji: '👩‍👧‍👦',
-    path: '/indian-mom-gpt',
-    color: 'bg-gradient-to-br from-rose-100 via-pink-50 to-orange-100 hover:from-rose-200 hover:via-pink-100 hover:to-orange-200 border-rose-300 shadow-md hover:shadow-lg',
-    image: '/images/mom-gpt.png'
+    id: "sharma-ji-ka-beta",
+    title: "Sharma Ji Ka Beta",
+    tagline: "How do you measure up?",
+    path: "/sharma-ji-ka-beta",
+    bg: "#F5E6C0",
+    text: "#1a1a1a",
+    shape: "bars",
+    image: "/images/sharma-ji-ka-beta.jpg",
   },
   {
-    id: 'earths-heartbeat',
-    title: "Earth's Heartbeat",
-    description: 'Feel the pulse of our living planet in real-time',
-    emoji: '🌍',
-    path: '/earths-heartbeat',
-    color: 'bg-blue-100 hover:bg-blue-200 border-blue-300',
-    image: '/images/earths_heartbeat.png'
+    id: "indian-childhood-score",
+    title: "Indian Childhood Score",
+    tagline: "How desi was your childhood?",
+    path: "/indian-childhood-score",
+    bg: "#F5DEB3",
+    text: "#1a1a1a",
+    shape: "checklist",
+    image: "/images/indian-childhood-score.jpg",
   },
   {
-    id: 'life-calendar',
-    title: 'Life in Weeks',
-    description: 'Visualize your entire life as 4,000 weeks',
-    emoji: '📅',
-    path: '/life-calendar',
-    color: 'bg-slate-100 hover:bg-slate-200 border-slate-300',
-    image: '/images/life in weeks.png'
+    id: "overthinking-spiral",
+    title: "The Overthinking Spiral",
+    tagline: "Type a worry. Watch it get worse.",
+    path: "/overthinking-spiral",
+    bg: "#1a1a4e",
+    text: "#ffffff",
+    shape: "spiral",
+    image: "/images/overthinking-spiral.jpg",
   },
   {
-    id: 'achievements',
-    title: 'Pointless Achievements',
-    description: 'Feel validated for doing nothing important',
-    emoji: '🏆',
-    path: '/achievements',
-    color: 'bg-yellow-100 hover:bg-yellow-200 border-yellow-300'
+    id: "draw-a-circle",
+    title: "Draw a Circle",
+    tagline: "How perfect is your circle?",
+    path: "/draw-a-circle",
+    bg: "#2a2a3e",
+    text: "#ffffff",
+    shape: "circle",
+    image: "/images/draw-a-circle.png",
   },
   {
-    id: 'indian-experiences',
-    title: '100 Indian Experiences',
-    description: 'Hilarious moments every Indian has lived through',
-    emoji: '🇮🇳',
-    path: '/indian-experiences',
-    color: 'bg-orange-100 hover:bg-orange-200 border-orange-300'
-  },
-  {
-    id: 'year-progress',
-    title: 'Year Progress Tracker',
-    description: 'Watch the current year slip away, second by second',
-    emoji: '📅',
-    path: '/year-progress',
-    color: 'bg-purple-100 hover:bg-purple-200 border-purple-300'
-  },
-  {
-    id: 'scroll-speed',
-    title: 'Scroll Speed Challenge',
-    description: 'Test how fast you can scroll and break speed records',
-    emoji: '🏃‍♂️',
-    path: '/scroll-speed',
-    color: 'bg-teal-100 hover:bg-teal-200 border-teal-300'
-  },
-  {
-    id: 'snake-fade',
-    title: 'Snake with a Twist',
-    description: 'Classic Snake game that gradually fades away as you play',
-    emoji: '🐍',
-    path: '/snake-fade',
-    color: 'bg-indigo-100 hover:bg-indigo-200 border-indigo-300'
+    id: "how-rare-are-you",
+    title: "How Rare Are You?",
+    tagline: "Find your dot in the crowd.",
+    path: "/how-rare-are-you",
+    bg: "#07071a",
+    text: "#ffffff",
+    shape: "dots",
   },
 ];
