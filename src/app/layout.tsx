@@ -14,32 +14,38 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Waste My Time",
-  description: "Three genuinely fun things to do with your afternoon.",
+  title: { default: "Waste My Time", template: "%s | Waste My Time" },
+  description: "Five genuinely fun interactive experiences to waste your afternoon on. Draw circles, overthink, benchmark yourself against Sharma Ji Ka Beta, and more.",
   keywords: [
-    "sharma ji ka beta", "indian childhood", "overthinking", "fun indian website",
-    "indian meme", "procrastination", "interactive", "neal.fun", "time waster"
+    "waste my time", "sharma ji ka beta", "indian childhood score", "overthinking spiral",
+    "draw a circle", "how rare are you", "fun website", "interactive games",
+    "neal.fun", "procrastination", "time waster", "indian meme", "personality quiz",
+    "rarity calculator", "circle drawing game"
   ],
-  authors: [{ name: "Waste My Time" }],
+  authors: [{ name: "KJR Labs", url: "https://kjrlabs.in" }],
+  creator: "KJR Labs",
+  publisher: "KJR Labs",
   metadataBase: new URL("https://wastemytime.fun"),
   alternates: { canonical: "https://wastemytime.fun" },
   openGraph: {
     title: "Waste My Time",
-    description: "Three genuinely fun things to do with your afternoon.",
+    description: "Five genuinely fun interactive experiences to waste your afternoon on.",
     url: "https://wastemytime.fun",
     siteName: "Waste My Time",
     type: "website",
     locale: "en_IN",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Waste My Time" }],
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Waste My Time — a corner of the internet for your afternoon" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Waste My Time",
-    description: "Three genuinely fun things to do with your afternoon.",
+    description: "Five genuinely fun interactive experiences to waste your afternoon on.",
     images: ["/og-image.png"],
+    creator: "@kjrlabs",
   },
-  robots: { index: true, follow: true },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   verification: { google: process.env.GOOGLE_VERIFICATION },
+  category: "entertainment",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -48,25 +54,43 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "WebSite",
     "name": "Waste My Time",
     "url": "https://wastemytime.fun",
-    "description": "Three genuinely fun interactive experiences.",
+    "description": "Five genuinely fun interactive experiences to waste your afternoon on.",
+    "author": { "@type": "Organization", "name": "KJR Labs", "url": "https://kjrlabs.in" },
     "mainEntity": [
       {
         "@type": "Game",
         "name": "Sharma Ji Ka Beta",
         "url": "https://wastemytime.fun/sharma-ji-ka-beta",
-        "description": "Benchmark yourself against the mythical Sharma Ji Ka Beta",
+        "description": "Enter your marks, job, and salary. Get benchmarked against the mythical Sharma Ji Ka Beta with a personalised AI roast.",
+        "applicationCategory": "EntertainmentApplication",
       },
       {
         "@type": "Game",
         "name": "Indian Childhood Score",
         "url": "https://wastemytime.fun/indian-childhood-score",
-        "description": "Check off Indian childhood experiences and see your score",
+        "description": "40 hyperspecific Indian childhood moments. Check off what applies and discover how desi your childhood really was.",
+        "applicationCategory": "EntertainmentApplication",
       },
       {
         "@type": "SoftwareApplication",
         "name": "The Overthinking Spiral",
         "url": "https://wastemytime.fun/overthinking-spiral",
-        "description": "Type a worry and watch it spiral into absurdity",
+        "description": "Type any worry. AI escalates it into five absurd catastrophic steps, then lands with a calm pivot.",
+        "applicationCategory": "EntertainmentApplication",
+      },
+      {
+        "@type": "Game",
+        "name": "Draw a Circle",
+        "url": "https://wastemytime.fun/draw-a-circle",
+        "description": "Draw a freehand circle anywhere on screen. Get scored on how close to perfect it is.",
+        "applicationCategory": "EntertainmentApplication",
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "How Rare Are You?",
+        "url": "https://wastemytime.fun/how-rare-are-you",
+        "description": "Select traits that apply to you. Discover your rarity as 1 in X people — visualised as a glowing dot in a field of thousands.",
+        "applicationCategory": "EntertainmentApplication",
       },
     ],
   };
