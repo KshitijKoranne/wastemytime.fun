@@ -14,7 +14,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/'],
       },
     ],
-    sitemap: 'https://wastemytime.fun/sitemap.xml',
-    host: 'https://wastemytime.fun',
+    sitemap: 'https://www.wastemytime.fun/sitemap.xml',
+    host: 'https://www.wastemytime.fun',
   };
 }

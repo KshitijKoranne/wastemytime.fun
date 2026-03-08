@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     "marks comparison india",
     "sharma ji ka beta game",
   ],
-  alternates: { canonical: "https://wastemytime.fun/sharma-ji-ka-beta" },
+  alternates: { canonical: "https://www.wastemytime.fun/sharma-ji-ka-beta" },
   openGraph: {
     title: "Sharma Ji Ka Beta — The Ultimate Comparison Test",
     description:
       "Enter your marks, job, and salary. Get ruthlessly benchmarked against the mythical Sharma Ji Ka Beta with a personalised AI roast.",
-    url: "https://wastemytime.fun/sharma-ji-ka-beta",
+    url: "https://www.wastemytime.fun/sharma-ji-ka-beta",
     images: [
       {
         url: "/images/sharma-ji-ka-beta.jpg",
@@ -45,7 +45,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Sharma Ji Ka Beta",
-    "url": "https://wastemytime.fun/sharma-ji-ka-beta",
+    "url": "https://www.wastemytime.fun/sharma-ji-ka-beta",
     "description":
       "Enter your marks, job, and salary. Get ruthlessly benchmarked against the mythical Sharma Ji Ka Beta with a personalised AI roast.",
     "applicationCategory": "EntertainmentApplication",
@@ -57,8 +57,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wastemytime.fun" },
-        { "@type": "ListItem", "position": 2, "name": "Sharma Ji Ka Beta", "item": "https://wastemytime.fun/sharma-ji-ka-beta" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wastemytime.fun" },
+        { "@type": "ListItem", "position": 2, "name": "Sharma Ji Ka Beta", "item": "https://www.wastemytime.fun/sharma-ji-ka-beta" },
       ],
     },
   };

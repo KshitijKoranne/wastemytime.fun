@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "interactive sound experiment",
     "room acoustics test",
   ],
-  alternates: { canonical: "https://wastemytime.fun/noise-floor" },
+  alternates: { canonical: "https://www.wastemytime.fun/noise-floor" },
   openGraph: {
     title: "The Noise Floor — Your Room Is Never Silent",
     description:
       "60 seconds. We listen to what you've stopped hearing — the hum, the breath, the machinery of your life.",
-    url: "https://wastemytime.fun/noise-floor",
+    url: "https://www.wastemytime.fun/noise-floor",
     images: [
       {
         url: "/images/noise-floor.png",
@@ -47,7 +47,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "The Noise Floor",
-    "url": "https://wastemytime.fun/noise-floor",
+    "url": "https://www.wastemytime.fun/noise-floor",
     "description":
       "An ambient sound experiment. 30 seconds of listening to your room's actual noise level, measured and reflected back to you. No audio recorded or stored.",
     "applicationCategory": "EntertainmentApplication",
@@ -58,8 +58,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wastemytime.fun" },
-        { "@type": "ListItem", "position": 2, "name": "The Noise Floor", "item": "https://wastemytime.fun/noise-floor" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wastemytime.fun" },
+        { "@type": "ListItem", "position": 2, "name": "The Noise Floor", "item": "https://www.wastemytime.fun/noise-floor" },
       ],
     },
   };

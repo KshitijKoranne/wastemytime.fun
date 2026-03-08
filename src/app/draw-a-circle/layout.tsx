@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     "neal fun draw circle alternative",
     "perfect circle online",
   ],
-  alternates: { canonical: "https://wastemytime.fun/draw-a-circle" },
+  alternates: { canonical: "https://www.wastemytime.fun/draw-a-circle" },
   openGraph: {
     title: "Draw a Perfect Circle — Get Scored on How Round It Is",
     description:
       "Draw a freehand circle and get instantly scored. Can you beat 90%? Most people can't.",
-    url: "https://wastemytime.fun/draw-a-circle",
+    url: "https://www.wastemytime.fun/draw-a-circle",
     images: [
       {
         url: "/images/draw-a-circle.png",
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "Game",
     "name": "Draw a Circle",
-    "url": "https://wastemytime.fun/draw-a-circle",
+    "url": "https://www.wastemytime.fun/draw-a-circle",
     "description":
       "Draw a freehand circle on screen and get scored on how close to perfect it is. Share your score and challenge friends.",
     "applicationCategory": "GameApplication",
@@ -57,8 +57,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wastemytime.fun" },
-        { "@type": "ListItem", "position": 2, "name": "Draw a Circle", "item": "https://wastemytime.fun/draw-a-circle" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wastemytime.fun" },
+        { "@type": "ListItem", "position": 2, "name": "Draw a Circle", "item": "https://www.wastemytime.fun/draw-a-circle" },
       ],
     },
   };

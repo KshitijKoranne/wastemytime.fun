@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "rare personality traits test",
     "how unique are you quiz",
   ],
-  alternates: { canonical: "https://wastemytime.fun/how-rare-are-you" },
+  alternates: { canonical: "https://www.wastemytime.fun/how-rare-are-you" },
   openGraph: {
     title: "How Rare Are You? — Find Out If You're 1 in a Million",
     description:
       "Select traits that apply to you and discover your rarity as 1 in X people. Are you common or extraordinary?",
-    url: "https://wastemytime.fun/how-rare-are-you",
+    url: "https://www.wastemytime.fun/how-rare-are-you",
     images: [
       {
         url: "/images/how-rare-are-you.png",
@@ -47,7 +47,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "Quiz",
     "name": "How Rare Are You?",
-    "url": "https://wastemytime.fun/how-rare-are-you",
+    "url": "https://www.wastemytime.fun/how-rare-are-you",
     "description":
       "Select traits that apply to you and discover your statistical rarity as 1 in X people, visualised in a crowd.",
     "isAccessibleForFree": true,
@@ -55,8 +55,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wastemytime.fun" },
-        { "@type": "ListItem", "position": 2, "name": "How Rare Are You?", "item": "https://wastemytime.fun/how-rare-are-you" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wastemytime.fun" },
+        { "@type": "ListItem", "position": 2, "name": "How Rare Are You?", "item": "https://www.wastemytime.fun/how-rare-are-you" },
       ],
     },
   };

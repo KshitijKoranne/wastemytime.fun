@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     "funny anxiety website",
     "type a worry",
   ],
-  alternates: { canonical: "https://wastemytime.fun/overthinking-spiral" },
+  alternates: { canonical: "https://www.wastemytime.fun/overthinking-spiral" },
   openGraph: {
     title: "The Overthinking Spiral — Type a Worry, Watch It Get Worse",
     description:
       "Type any worry. AI escalates it into five absurd catastrophic steps — then finds the calm. Watch anxiety become comedy.",
-    url: "https://wastemytime.fun/overthinking-spiral",
+    url: "https://www.wastemytime.fun/overthinking-spiral",
     images: [
       {
         url: "/images/overthinking-spiral.jpg",
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "The Overthinking Spiral",
-    "url": "https://wastemytime.fun/overthinking-spiral",
+    "url": "https://www.wastemytime.fun/overthinking-spiral",
     "description":
       "Type any worry. AI escalates it into five increasingly absurd catastrophic steps, then lands with a calm, grounding pivot.",
     "applicationCategory": "EntertainmentApplication",
@@ -56,8 +56,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wastemytime.fun" },
-        { "@type": "ListItem", "position": 2, "name": "The Overthinking Spiral", "item": "https://wastemytime.fun/overthinking-spiral" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wastemytime.fun" },
+        { "@type": "ListItem", "position": 2, "name": "The Overthinking Spiral", "item": "https://www.wastemytime.fun/overthinking-spiral" },
       ],
     },
   };

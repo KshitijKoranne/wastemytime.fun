@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     "specimen collector",
     "waste my time",
   ],
-  alternates: { canonical: "https://wastemytime.fun/your-bug" },
+  alternates: { canonical: "https://www.wastemytime.fun/your-bug" },
   openGraph: {
     title: "Your Bug — Discover Your Unique Specimen",
     description:
       "Every visit generates a never-before-seen insect. Give it a name. Add it to your collection. No two alike.",
-    url: "https://wastemytime.fun/your-bug",
+    url: "https://www.wastemytime.fun/your-bug",
     images: [{ url: "/images/your-bug.png", width: 1320, height: 660, alt: "Your Bug — Victorian entomology specimen card" }],
   },
   twitter: {
@@ -37,7 +37,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "Your Bug",
-    url: "https://wastemytime.fun/your-bug",
+    url: "https://www.wastemytime.fun/your-bug",
     description:
       "A procedural insect generator. Every visit creates a unique, never-before-seen specimen with a Latin name. Name it and add it to your personal collection.",
     applicationCategory: "EntertainmentApplication",
@@ -47,8 +47,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Home", item: "https://wastemytime.fun" },
-        { "@type": "ListItem", position: 2, name: "Your Bug", item: "https://wastemytime.fun/your-bug" },
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://www.wastemytime.fun" },
+        { "@type": "ListItem", position: 2, name: "Your Bug", item: "https://www.wastemytime.fun/your-bug" },
       ],
     },
   };

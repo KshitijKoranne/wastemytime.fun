@@ -41,7 +41,7 @@ CALM: [sentence]`;
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://wastemytime.fun",
+        "HTTP-Referer": "https://www.wastemytime.fun",
         "X-Title": "Waste My Time - Overthinking Spiral",
       },
       body: JSON.stringify({

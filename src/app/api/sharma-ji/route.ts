@@ -106,7 +106,7 @@ Write EXACTLY 2-3 sentences as Sharma Ji's mom. Rules:
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://wastemytime.fun",
+        "HTTP-Referer": "https://www.wastemytime.fun",
         "X-Title": "Waste My Time - Sharma Ji Ka Beta",
       },
       body: JSON.stringify({

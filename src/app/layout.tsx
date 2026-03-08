@@ -44,13 +44,13 @@ export const metadata: Metadata = {
   authors: [{ name: "KJR Labs", url: "https://kjrlabs.in" }],
   creator: "KJR Labs",
   publisher: "KJR Labs",
-  metadataBase: new URL("https://wastemytime.fun"),
-  alternates: { canonical: "https://wastemytime.fun" },
+  metadataBase: new URL("https://www.wastemytime.fun"),
+  alternates: { canonical: "https://www.wastemytime.fun" },
   openGraph: {
     title: "Waste My Time — Fun Interactive Experiences",
     description:
       "Six genuinely fun, interactive web experiments. Draw circles, listen to your room, discover how rare you are. No ads, no sign-up.",
-    url: "https://wastemytime.fun",
+    url: "https://www.wastemytime.fun",
     siteName: "Waste My Time",
     type: "website",
     locale: "en_US",
@@ -95,10 +95,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": "https://wastemytime.fun/#website",
+    "@id": "https://www.wastemytime.fun/#website",
     "name": "Waste My Time",
     "alternateName": "wastemytime.fun",
-    "url": "https://wastemytime.fun",
+    "url": "https://www.wastemytime.fun",
     "description": "Six genuinely fun, interactive web experiments to waste your afternoon on. No ads, no sign-up.",
     "author": {
       "@type": "Organization",
@@ -107,7 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://wastemytime.fun/?q={search_term_string}",
+      "target": "https://www.wastemytime.fun/?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };
@@ -117,7 +117,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@type": "ItemList",
     "name": "Interactive Experiences on Waste My Time",
     "description": "A collection of fun, interactive web experiments",
-    "url": "https://wastemytime.fun",
+    "url": "https://www.wastemytime.fun",
     "numberOfItems": 6,
     "itemListElement": [
       {
@@ -125,42 +125,42 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         "position": 1,
         "name": "Sharma Ji Ka Beta",
         "description": "Benchmark yourself against the mythical Sharma Ji Ka Beta with a personalised AI roast. Enter your marks, job, and salary.",
-        "url": "https://wastemytime.fun/sharma-ji-ka-beta",
+        "url": "https://www.wastemytime.fun/sharma-ji-ka-beta",
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Indian Childhood Score",
         "description": "40 hyperspecific Indian childhood moments — steel tiffin boxes, DD National, chappals near the door. Discover your desi score.",
-        "url": "https://wastemytime.fun/indian-childhood-score",
+        "url": "https://www.wastemytime.fun/indian-childhood-score",
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": "The Overthinking Spiral",
         "description": "Type any worry. Watch AI escalate it into five increasingly absurd catastrophic steps, then find calm.",
-        "url": "https://wastemytime.fun/overthinking-spiral",
+        "url": "https://www.wastemytime.fun/overthinking-spiral",
       },
       {
         "@type": "ListItem",
         "position": 4,
         "name": "Draw a Circle",
         "description": "Draw a freehand circle on screen and get scored on how close to perfect it is. Can you beat 90%?",
-        "url": "https://wastemytime.fun/draw-a-circle",
+        "url": "https://www.wastemytime.fun/draw-a-circle",
       },
       {
         "@type": "ListItem",
         "position": 5,
         "name": "How Rare Are You?",
         "description": "Select traits that apply to you and discover your rarity as 1 in X people, visualised as a glowing dot in a crowd.",
-        "url": "https://wastemytime.fun/how-rare-are-you",
+        "url": "https://www.wastemytime.fun/how-rare-are-you",
       },
       {
         "@type": "ListItem",
         "position": 6,
         "name": "The Noise Floor",
         "description": "60 seconds of ambient listening. Discover what your room actually sounds like when you stop ignoring it.",
-        "url": "https://wastemytime.fun/noise-floor",
+        "url": "https://www.wastemytime.fun/noise-floor",
       },
     ],
   };
@@ -171,7 +171,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@id": "https://kjrlabs.in/#organization",
     "name": "KJR Labs",
     "url": "https://kjrlabs.in",
-    "sameAs": ["https://wastemytime.fun"],
+    "sameAs": ["https://www.wastemytime.fun"],
   };
 
   return (

@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     "how desi are you",
     "indian upbringing quiz",
   ],
-  alternates: { canonical: "https://wastemytime.fun/indian-childhood-score" },
+  alternates: { canonical: "https://www.wastemytime.fun/indian-childhood-score" },
   openGraph: {
     title: "Indian Childhood Score — How Desi Was Your Childhood?",
     description:
       "40 hyperspecific Indian childhood moments. Check off what applies and discover your true desi score.",
-    url: "https://wastemytime.fun/indian-childhood-score",
+    url: "https://www.wastemytime.fun/indian-childhood-score",
     images: [
       {
         url: "/images/indian-childhood-score.jpg",
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "@context": "https://schema.org",
     "@type": "Quiz",
     "name": "Indian Childhood Score",
-    "url": "https://wastemytime.fun/indian-childhood-score",
+    "url": "https://www.wastemytime.fun/indian-childhood-score",
     "description":
       "40 hyperspecific Indian childhood moments — check off what applies and discover your desi childhood score.",
     "educationalAlignment": {
@@ -60,8 +60,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "breadcrumb": {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://wastemytime.fun" },
-        { "@type": "ListItem", "position": 2, "name": "Indian Childhood Score", "item": "https://wastemytime.fun/indian-childhood-score" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.wastemytime.fun" },
+        { "@type": "ListItem", "position": 2, "name": "Indian Childhood Score", "item": "https://www.wastemytime.fun/indian-childhood-score" },
       ],
     },
   };
