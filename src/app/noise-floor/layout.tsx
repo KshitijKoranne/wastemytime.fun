@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     url: "https://wastemytime.fun/noise-floor",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: "/images/noise-floor.png",
+        width: 1305,
+        height: 734,
         alt: "The Noise Floor — ambient sound experiment",
       },
     ],
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "The Noise Floor — Your Room Is Never Silent",
     description:
       "60 seconds of ambient listening. Discover what your room sounds like when you stop ignoring it.",
-    images: ["/og-image.png"],
+    images: ["/images/noise-floor.png"],
   },
 };
 

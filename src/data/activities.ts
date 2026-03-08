@@ -67,5 +67,6 @@ export const activities: Activity[] = [
     bg: "#0a0a0a",
     text: "#f0f0f0",
     shape: "bars",
+    image: "/images/noise-floor.png",
   },
 ];
