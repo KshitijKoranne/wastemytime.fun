@@ -85,6 +85,11 @@ export default function NoiseFloor() {
   const [obsVisible, setObsVisible] = useState(true);
   const [result, setResult] = useState<Reading | null>(null);
   const [resultObs, setResultObs] = useState<Observation[]>([]);
+  const [shareCardUrl, setShareCardUrl] = useState<string | null>(null);
+  const [sharePreviewOpen, setSharePreviewOpen] = useState(false);
+  const [shareStatus, setShareStatus] = useState<"idle" | "generating" | "ready">("idle");
+
+  const waveSnapshotRef = useRef<string | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -240,6 +245,10 @@ export default function NoiseFloor() {
 
   /* ── Finish ── */
   const finishListening = useCallback(() => {
+    // Snapshot waveform BEFORE stopping audio (last live frame)
+    if (canvasRef.current) {
+      waveSnapshotRef.current = canvasRef.current.toDataURL("image/png");
+    }
     stopAudio();
     const readings = dbReadingsRef.current;
     const avg = readings.length
@@ -297,8 +306,151 @@ export default function NoiseFloor() {
     setResult(null);
     setElapsed(0);
     setLiveDb(null);
+    setShareCardUrl(null);
+    setSharePreviewOpen(false);
+    setShareStatus("idle");
+    waveSnapshotRef.current = null;
   }, [stopAudio]);
 
+
+  /* ── Generate share card ── */
+  const generateShareCard = useCallback(async () => {
+    if (!result || !waveSnapshotRef.current) return;
+    setShareStatus("generating");
+
+    const W = 900, H = 500;
+    const offscreen = document.createElement("canvas");
+    offscreen.width = W;
+    offscreen.height = H;
+    const c = offscreen.getContext("2d")!;
+
+    // Background
+    c.fillStyle = "#080808";
+    c.fillRect(0, 0, W, H);
+
+    // Subtle grain via noise pattern
+    for (let i = 0; i < 18000; i++) {
+      const x = Math.random() * W;
+      const y = Math.random() * H;
+      const alpha = Math.random() * 0.025;
+      c.fillStyle = `rgba(255,255,255,${alpha})`;
+      c.fillRect(x, y, 1, 1);
+    }
+
+    // Waveform image — top 55% of card
+    const waveImg = new Image();
+    await new Promise<void>((res) => {
+      waveImg.onload = () => res();
+      waveImg.src = waveSnapshotRef.current!;
+    });
+    const waveH = H * 0.52;
+    c.globalAlpha = 0.85;
+    c.drawImage(waveImg, 0, 0, W, waveH);
+    c.globalAlpha = 1;
+
+    // Fade waveform out at bottom with gradient
+    const fadeGrad = c.createLinearGradient(0, waveH * 0.55, 0, waveH);
+    fadeGrad.addColorStop(0, "rgba(8,8,8,0)");
+    fadeGrad.addColorStop(1, "rgba(8,8,8,1)");
+    c.fillStyle = fadeGrad;
+    c.fillRect(0, 0, W, waveH);
+
+    // Divider line
+    c.strokeStyle = "rgba(184,169,154,0.18)";
+    c.lineWidth = 1;
+    c.beginPath();
+    c.moveTo(48, waveH + 1);
+    c.lineTo(W - 48, waveH + 1);
+    c.stroke();
+
+    // Bottom section y-anchor
+    const by = waveH + 28;
+
+    // dB label (small caps)
+    c.font = "500 13px 'Inter', monospace";
+    c.letterSpacing = "4px";
+    c.fillStyle = "rgba(255,255,255,0.22)";
+    c.fillText("NOISE FLOOR", 52, by + 18);
+
+    // Big dB number
+    c.font = `200 ${H * 0.28}px 'Inter', monospace`;
+    c.fillStyle = "#f0f0f0";
+    c.fillText(`${result.avg}`, 48, by + 22 + H * 0.28);
+
+    // dB unit label
+    c.font = "300 18px 'Inter', monospace";
+    c.fillStyle = "rgba(184,169,154,0.6)";
+    c.fillText("dB avg", 52, by + H * 0.28 + 50);
+
+    // Comparable to
+    c.font = "300 16px 'Inter', monospace";
+    c.fillStyle = "rgba(255,255,255,0.35)";
+    c.fillText(`comparable to ${getComparison(result.avg)}`, 52, by + H * 0.28 + 78);
+
+    // Right side stats block
+    const rx = W - 52;
+    const statsY = by + 14;
+
+    const stats = [
+      { label: "QUIETEST", value: `${result.min}dB` },
+      { label: "AVERAGE",  value: `${result.avg}dB` },
+      { label: "LOUDEST",  value: `${result.max}dB` },
+    ];
+
+    stats.forEach((s, i) => {
+      const sy = statsY + i * 56;
+      c.font = "500 11px 'Inter', monospace";
+      c.fillStyle = "rgba(255,255,255,0.2)";
+      c.textAlign = "right";
+      c.fillText(s.label, rx, sy + 14);
+      c.font = `200 28px 'Inter', monospace`;
+      c.fillStyle = "#c8c8c8";
+      c.fillText(s.value, rx, sy + 42);
+    });
+
+    // URL watermark bottom right
+    c.font = "300 13px 'Inter', monospace";
+    c.fillStyle = "rgba(255,255,255,0.15)";
+    c.textAlign = "right";
+    c.fillText("wastemytime.fun/noise-floor", rx, H - 20);
+
+    // Bottom-left timestamp
+    c.font = "300 13px 'Inter', monospace";
+    c.fillStyle = "rgba(255,255,255,0.12)";
+    c.textAlign = "left";
+    c.fillText(new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }), 52, H - 20);
+
+    const url = offscreen.toDataURL("image/png");
+    setShareCardUrl(url);
+    setShareStatus("ready");
+    setSharePreviewOpen(true);
+  }, [result]);
+
+  /* ── Share/download card ── */
+  const downloadCard = useCallback(() => {
+    if (!shareCardUrl) return;
+    const a = document.createElement("a");
+    a.href = shareCardUrl;
+    a.download = `noise-floor-${result?.avg ?? 0}db.png`;
+    a.click();
+  }, [shareCardUrl, result]);
+
+  const nativeShare = useCallback(async () => {
+    if (!shareCardUrl || !navigator.share) return;
+    try {
+      const res = await fetch(shareCardUrl);
+      const blob = await res.blob();
+      const file = new File([blob], `noise-floor-${result?.avg ?? 0}db.png`, { type: "image/png" });
+      await navigator.share({
+        title: "The Noise Floor",
+        text: `My room averaged ${result?.avg}dB — comparable to ${getComparison(result?.avg ?? 0)}. Your room is never silent.`,
+        files: [file],
+      });
+    } catch {
+      // fallback: just download
+      downloadCard();
+    }
+  }, [shareCardUrl, result, downloadCard]);
 
   /* ── Progress ── */
   const progressPct = Math.min((elapsed / DURATION) * 100, 100);
@@ -598,14 +750,118 @@ export default function NoiseFloor() {
               🔒 &nbsp;no audio was recorded or stored
             </p>
 
-            {/* Share */}
-            <div style={{ marginBottom: "2rem" }}>
-              <ShareButtons
-                theme="dark"
-                label="Share your result"
-                text={`The Noise Floor — my room averaged ${result.avg}dB. That's comparable to ${getComparison(result.avg)}. Your room is never silent.`}
-                url="https://www.wastemytime.fun/noise-floor"
-              />
+            {/* Share as image */}
+            <div style={{ marginBottom: "2.5rem", display: "flex", flexDirection: "column", alignItems: "center", gap: 14 }}>
+              <span style={{ fontFamily: mono, fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.25)" }}>
+                Share your result
+              </span>
+
+              {/* Preview card */}
+              {sharePreviewOpen && shareCardUrl && (
+                <div style={{
+                  width: "min(480px,90vw)",
+                  borderRadius: 4,
+                  overflow: "hidden",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+                  animation: "fadeIn 0.3s ease",
+                }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={shareCardUrl} alt="Share card preview" style={{ width: "100%", display: "block" }} />
+                </div>
+              )}
+
+              {/* Action buttons */}
+              <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center" }}>
+                {!sharePreviewOpen ? (
+                  <button
+                    onClick={generateShareCard}
+                    disabled={shareStatus === "generating"}
+                    style={{
+                      display: "flex", alignItems: "center", gap: 7,
+                      padding: "9px 20px",
+                      background: shareStatus === "generating" ? "rgba(184,169,154,0.1)" : "rgba(184,169,154,0.15)",
+                      border: "1px solid rgba(184,169,154,0.3)",
+                      borderRadius: 3, color: accent,
+                      fontFamily: mono, fontSize: "0.72rem", letterSpacing: "0.15em",
+                      textTransform: "uppercase", cursor: shareStatus === "generating" ? "default" : "pointer",
+                      transition: "background 0.2s",
+                    }}
+                    onMouseEnter={e => shareStatus !== "generating" && ((e.currentTarget as HTMLElement).style.background = "rgba(184,169,154,0.22)")}
+                    onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "rgba(184,169,154,0.15)")}
+                  >
+                    {shareStatus === "generating" ? (
+                      <>
+                        <span style={{ width: 10, height: 10, border: `1.5px solid ${accent}`, borderTopColor: "transparent", borderRadius: "50%", display: "inline-block", animation: "spin 0.7s linear infinite" }} />
+                        generating…
+                      </>
+                    ) : (
+                      <>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+                        </svg>
+                        Generate share card
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <>
+                    {typeof navigator !== "undefined" && "share" in navigator ? (
+                      <button
+                        onClick={nativeShare}
+                        style={{
+                          display: "flex", alignItems: "center", gap: 7,
+                          padding: "9px 20px",
+                          background: "rgba(184,169,154,0.15)",
+                          border: "1px solid rgba(184,169,154,0.3)",
+                          borderRadius: 3, color: accent,
+                          fontFamily: mono, fontSize: "0.72rem", letterSpacing: "0.15em",
+                          textTransform: "uppercase", cursor: "pointer",
+                        }}
+                        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "rgba(184,169,154,0.22)")}
+                        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "rgba(184,169,154,0.15)")}
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/>
+                        </svg>
+                        Share
+                      </button>
+                    ) : null}
+                    <button
+                      onClick={downloadCard}
+                      style={{
+                        display: "flex", alignItems: "center", gap: 7,
+                        padding: "9px 20px",
+                        background: "transparent",
+                        border: "1px solid rgba(255,255,255,0.12)",
+                        borderRadius: 3, color: "rgba(255,255,255,0.5)",
+                        fontFamily: mono, fontSize: "0.72rem", letterSpacing: "0.15em",
+                        textTransform: "uppercase", cursor: "pointer",
+                      }}
+                      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.05)")}
+                      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.background = "transparent")}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                      </svg>
+                      Download
+                    </button>
+                    <button
+                      onClick={() => { setSharePreviewOpen(false); setShareStatus("idle"); setShareCardUrl(null); }}
+                      style={{
+                        padding: "9px 14px",
+                        background: "transparent",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        borderRadius: 3, color: "rgba(255,255,255,0.25)",
+                        fontFamily: mono, fontSize: "0.72rem", letterSpacing: "0.12em",
+                        textTransform: "uppercase", cursor: "pointer",
+                      }}
+                    >
+                      ✕
+                    </button>
+                  </>
+                )}
+              </div>
             </div>
 
             {/* Actions */}
@@ -624,8 +880,11 @@ export default function NoiseFloor() {
         )}
       </div>
 
-      {/* Pulse animation */}
-      <style>{`@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.6)} }`}</style>
+      <style>{`
+        @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.6)} }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes spin { to{transform:rotate(360deg)} }
+      `}</style>
     </div>
   );
 }
