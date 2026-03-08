@@ -6,9 +6,15 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/_next/', '/admin/'],
-      }
+        disallow: ['/api/', '/_next/'],
+      },
+      {
+        // Block AI training crawlers
+        userAgent: ['GPTBot', 'Google-Extended', 'CCBot', 'anthropic-ai', 'Claude-Web'],
+        disallow: ['/'],
+      },
     ],
     sitemap: 'https://wastemytime.fun/sitemap.xml',
+    host: 'https://wastemytime.fun',
   };
 }

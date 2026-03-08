@@ -1,19 +1,44 @@
 {
   "name": "Waste My Time",
-  "short_name": "WasteMytime",
+  "short_name": "WasteMyTime",
+  "description": "Six genuinely fun interactive experiences to waste your afternoon on. No ads, no sign-up.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#F5F0E8",
+  "background_color": "#F5F0E8",
+  "lang": "en",
+  "scope": "/",
+  "categories": ["entertainment", "games"],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "shortcuts": [
+    {
+      "name": "Draw a Circle",
+      "url": "/draw-a-circle",
+      "description": "Draw a freehand circle and get scored"
+    },
+    {
+      "name": "How Rare Are You?",
+      "url": "/how-rare-are-you",
+      "description": "Discover your statistical rarity"
+    },
+    {
+      "name": "The Noise Floor",
+      "url": "/noise-floor",
+      "description": "Listen to your room for 60 seconds"
+    }
+  ]
 }
