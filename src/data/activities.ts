@@ -58,6 +58,7 @@ export const activities: Activity[] = [
     bg: "#07071a",
     text: "#ffffff",
     shape: "dots",
+    image: "/images/how-rare-are-you.png",
   },
   {
     id: "your-bug",
@@ -67,6 +68,7 @@ export const activities: Activity[] = [
     bg: "#F5EDD6",
     text: "#2a1a0a",
     shape: "dots",
+    image: "/images/your-bug.png",
   },
   {
     id: "noise-floor",

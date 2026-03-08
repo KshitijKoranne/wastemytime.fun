@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     url: "https://wastemytime.fun/how-rare-are-you",
     images: [
       {
-        url: "/og-image.png",
+        url: "/images/how-rare-are-you.png",
         width: 1200,
         height: 630,
         alt: "How Rare Are You — rarity calculator",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "How Rare Are You? — Are You 1 in a Million?",
     description:
       "Select your traits and discover your rarity score. Visualised as your dot in a crowd of thousands.",
-    images: ["/og-image.png"],
+    images: ["/images/how-rare-are-you.png"],
   },
 };
 

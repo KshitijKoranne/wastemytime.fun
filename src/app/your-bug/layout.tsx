@@ -22,12 +22,13 @@ export const metadata: Metadata = {
     description:
       "Every visit generates a never-before-seen insect. Give it a name. Add it to your collection. No two alike.",
     url: "https://wastemytime.fun/your-bug",
+    images: [{ url: "/images/your-bug.png", width: 1320, height: 660, alt: "Your Bug — Victorian entomology specimen card" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Your Bug — Discover Your Unique Specimen",
-    description:
-      "Every visit generates a never-before-seen insect. Name it. Catalogue it.",
+    description: "Every visit generates a never-before-seen insect. Name it. Catalogue it.",
+    images: ["/images/your-bug.png"],
   },
 };
 
