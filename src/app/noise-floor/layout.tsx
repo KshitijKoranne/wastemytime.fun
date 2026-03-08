@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "The Noise Floor — Your Room Is Never Silent",
   description:
-    "60 seconds of ambient listening. We measure what you've stopped hearing — the hum, the breath, the machinery of your life. Discover your room's true sound level. No audio is ever recorded.",
+    "30 seconds of ambient listening. We measure what you've stopped hearing — the hum, the breath, the machinery of your life. Discover your room's true sound level. No audio is ever recorded.",
   keywords: [
     "noise floor",
     "ambient sound experiment",
@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     "name": "The Noise Floor",
     "url": "https://wastemytime.fun/noise-floor",
     "description":
-      "An ambient sound experiment. 60 seconds of listening to your room's actual noise level, measured and reflected back to you. No audio recorded or stored.",
+      "An ambient sound experiment. 30 seconds of listening to your room's actual noise level, measured and reflected back to you. No audio recorded or stored.",
     "applicationCategory": "EntertainmentApplication",
     "operatingSystem": "Any",
     "browserRequirements": "Requires microphone access, JavaScript",

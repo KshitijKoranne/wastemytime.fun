@@ -23,7 +23,7 @@ interface Observation {
 /* ─────────────────────────────────────────────
    CONSTANTS
 ───────────────────────────────────────────── */
-const DURATION = 60; // seconds
+const DURATION = 30; // seconds
 
 const OBSERVATION_POOL: { threshold: number; text: string }[] = [
   { threshold: 5,  text: "Almost nothing. Silence has its own texture." },
@@ -250,7 +250,7 @@ export default function NoiseFloor() {
 
     // Deduplicate observations by text
     const unique = [...new Map(capturedObsRef.current.map(o => [o.text, o])).values()];
-    if (unique.length === 0) unique.push({ time: 30, text: "The room revealed nothing unusual. Or everything." });
+    if (unique.length === 0) unique.push({ time: 15, text: "The room revealed nothing unusual. Or everything." });
 
     setResult({ avg, min, max });
     setResultObs(unique.slice(0, 5));
@@ -389,7 +389,7 @@ export default function NoiseFloor() {
 
         <p style={{ fontFamily: mono, fontSize: "0.72rem", fontWeight: 300, color: mid, lineHeight: 2.1, letterSpacing: "0.02em", maxWidth: 360, marginBottom: "3.5rem" }}>
           Place your device still.<br />
-          <span style={{ color: bright }}>60 seconds.</span> That&apos;s all.<br /><br />
+          <span style={{ color: bright }}>30 seconds.</span> That&apos;s all.<br /><br />
           We&apos;ll listen to what you&apos;ve stopped hearing —<br />
           the hum, the breath, the machinery of your life.
         </p>
@@ -439,6 +439,32 @@ export default function NoiseFloor() {
         <p style={{ position: "absolute", top: "2.5rem", fontFamily: mono, fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: dim }}>
           listening to your room
         </p>
+
+        {/* Stay quiet notice — fades out after 5s */}
+        {elapsed < 6 && (
+          <div style={{
+            position: "absolute",
+            top: "5rem",
+            left: "50%",
+            transform: "translateX(-50%)",
+            textAlign: "center",
+            opacity: elapsed > 4 ? 0 : 1,
+            transition: "opacity 1s ease",
+            pointerEvents: "none",
+          }}>
+            <p style={{
+              fontFamily: serif,
+              fontSize: "clamp(0.85rem,2vw,1rem)",
+              fontStyle: "italic",
+              fontWeight: 300,
+              color: accent,
+              letterSpacing: "0.04em",
+              margin: 0,
+            }}>
+              stay quiet — let the room speak
+            </p>
+          </div>
+        )}
 
         {/* Waveform canvas */}
         <canvas
