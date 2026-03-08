@@ -60,6 +60,15 @@ export const activities: Activity[] = [
     shape: "dots",
   },
   {
+    id: "your-bug",
+    title: "Your Bug",
+    tagline: "A new species. Only yours.",
+    path: "/your-bug",
+    bg: "#F5EDD6",
+    text: "#2a1a0a",
+    shape: "dots",
+  },
+  {
     id: "noise-floor",
     title: "The Noise Floor",
     tagline: "Your room is never silent.",
