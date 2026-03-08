@@ -59,4 +59,13 @@ export const activities: Activity[] = [
     text: "#ffffff",
     shape: "dots",
   },
+  {
+    id: "noise-floor",
+    title: "The Noise Floor",
+    tagline: "Your room is never silent.",
+    path: "/noise-floor",
+    bg: "#0a0a0a",
+    text: "#f0f0f0",
+    shape: "bars",
+  },
 ];
