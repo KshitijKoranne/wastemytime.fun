@@ -38,17 +38,7 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // Redirect www to non-www (canonical domain consolidation)
-  async redirects() {
-    return [
-      {
-        source: "/(.*)",
-        has: [{ type: "host", value: "www.wastemytime.fun" }],
-        destination: "https://wastemytime.fun/:path*",
-        permanent: true,
-      },
-    ];
-  },
+
 };
 
 export default nextConfig;
