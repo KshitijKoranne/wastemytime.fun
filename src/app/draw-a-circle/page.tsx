@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 type GameState = "idle" | "drawing" | "result";
 
@@ -405,6 +406,14 @@ export default function DrawACircle() {
           <div style={{ width: "min(90vw, 680px)" }}>
             <YouMayLike currentId="draw-a-circle" />
           </div>
+          {result && (
+            <ShareButtons
+              theme="dark"
+              label="Share your score"
+              text={`I drew a ${result.score}% perfect circle on wastemytime.fun — can you beat it?`}
+              url="https://www.wastemytime.fun/draw-a-circle"
+            />
+          )}
           <button
             onClick={reset}
             style={{

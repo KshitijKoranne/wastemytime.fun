@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 interface SpiralResult {
   steps: string[];
@@ -283,6 +284,16 @@ export default function OverthinkingSpiral() {
             {showCalm && (
               <div className="mt-4">
                 <YouMayLike currentId="overthinking-spiral" />
+              </div>
+            )}
+            {showCalm && (
+              <div className="mt-3">
+                <ShareButtons
+                  theme="dark"
+                  label="Share the spiral"
+                  text={`I went down an overthinking spiral about "${worry}" on wastemytime.fun`}
+                  url="https://www.wastemytime.fun/overthinking-spiral"
+                />
               </div>
             )}
           </div>

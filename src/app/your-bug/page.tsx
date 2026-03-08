@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 // ─── Seeded RNG ───────────────────────────────────────────────────────────────
 function mulberry32(seed: number) {
@@ -346,7 +347,7 @@ export default function YourBugPage() {
         <BackLink />
         <span
           onClick={() => setScreen(screen === "archive" ? "discover" : "archive")}
-          style={{ fontSize: 12, letterSpacing: 2, textTransform: "uppercase", color: "rgba(42,26,10,0.38)", cursor: "pointer" }}
+          style={{ fontSize: 14, letterSpacing: 2, textTransform: "uppercase", color: "rgba(42,26,10,0.38)", cursor: "pointer" }}
         >
           {screen === "archive" ? "← back" : `archive (${archive.length})`}
         </span>
@@ -358,7 +359,7 @@ export default function YourBugPage() {
           <h2 style={{ textAlign: "center", fontStyle: "italic", fontSize: 30, color: "rgba(42,26,10,0.8)", marginBottom: 4 }}>
             Your Collection
           </h2>
-          <p style={{ textAlign: "center", fontStyle: "italic", fontSize: 13, color: "rgba(42,26,10,0.4)", marginBottom: 36 }}>
+          <p style={{ textAlign: "center", fontStyle: "italic", fontSize: 15, color: "rgba(42,26,10,0.4)", marginBottom: 36 }}>
             {archive.length === 0 ? "Nothing catalogued yet." : `${archive.length} specimen${archive.length !== 1 ? "s" : ""} discovered`}
           </p>
           {archive.length === 0 ? (
@@ -369,7 +370,7 @@ export default function YourBugPage() {
               <button
                 onClick={() => setScreen("discover")}
                 className="bug-btn"
-                style={{ padding: "11px 28px", background: "rgba(42,26,10,0.82)", color: "#F5EDD6", border: "none", borderRadius: 3, letterSpacing: 1.5, textTransform: "uppercase", fontSize: 12 }}
+                style={{ padding: "11px 28px", background: "rgba(42,26,10,0.82)", color: "#F5EDD6", border: "none", borderRadius: 3, letterSpacing: 1.5, textTransform: "uppercase", fontSize: 14 }}
               >
                 Discover
               </button>
@@ -389,8 +390,8 @@ export default function YourBugPage() {
                   />
                   <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid rgba(42,26,10,0.12)" }}>
                     <div style={{ fontSize: 14, fontWeight: "bold", color: "rgba(42,26,10,0.82)" }}>{e.commonName}</div>
-                    <div style={{ fontSize: 10, fontStyle: "italic", color: "rgba(42,26,10,0.45)", marginTop: 2 }}>{e.genus} {e.species}</div>
-                    <div style={{ fontSize: 10, color: "rgba(42,26,10,0.3)", marginTop: 3 }}>{e.date}</div>
+                    <div style={{ fontSize: 15, fontStyle: "italic", color: "rgba(42,26,10,0.45)", marginTop: 2 }}>{e.genus} {e.species}</div>
+                    <div style={{ fontSize: 15, color: "rgba(42,26,10,0.3)", marginTop: 3 }}>{e.date}</div>
                   </div>
                 </div>
               ))}
@@ -405,7 +406,7 @@ export default function YourBugPage() {
         <div className="bug-fade" style={{ width: "100%", maxWidth: 480, display: "flex", flexDirection: "column", alignItems: "center" }}>
           {/* Title */}
           <div style={{ textAlign: "center", marginBottom: 28 }}>
-            <div style={{ fontSize: 11, letterSpacing: 3, textTransform: "uppercase", color: "rgba(42,26,10,0.35)", marginBottom: 6 }}>
+            <div style={{ fontSize: 15, letterSpacing: 3, textTransform: "uppercase", color: "rgba(42,26,10,0.35)", marginBottom: 6 }}>
               new species
             </div>
             <h1 style={{ fontSize: 38, margin: 0, color: "rgba(42,26,10,0.82)", lineHeight: 1.1 }}>
@@ -457,10 +458,10 @@ export default function YourBugPage() {
                   &ldquo;{commonName}&rdquo;
                 </div>
               )}
-              <div style={{ fontSize: 12, fontStyle: "italic", color: "rgba(42,26,10,0.38)", marginTop: 5 }}>
+              <div style={{ fontSize: 14, fontStyle: "italic", color: "rgba(42,26,10,0.38)", marginTop: 5 }}>
                 {habitat}
               </div>
-              <div style={{ fontSize: 11, letterSpacing: 0.5, color: "rgba(42,26,10,0.27)", marginTop: 3 }}>
+              <div style={{ fontSize: 15, letterSpacing: 0.5, color: "rgba(42,26,10,0.27)", marginTop: 3 }}>
                 {today}
               </div>
             </div>
@@ -475,19 +476,19 @@ export default function YourBugPage() {
                     <button
                       onClick={regen}
                       className="bug-btn"
-                      style={{ flex: 1, padding: "11px 0", background: "transparent", border: "1px solid rgba(42,26,10,0.28)", borderRadius: 3, fontSize: 12, color: "rgba(42,26,10,0.55)", letterSpacing: 1.5, textTransform: "uppercase" }}
+                      style={{ flex: 1, padding: "11px 0", background: "transparent", border: "1px solid rgba(42,26,10,0.28)", borderRadius: 3, fontSize: 14, color: "rgba(42,26,10,0.55)", letterSpacing: 1.5, textTransform: "uppercase" }}
                     >
                       Next →
                     </button>
                     <button
                       onClick={() => setScreen("name")}
                       className="bug-btn"
-                      style={{ flex: 1, padding: "11px 0", background: "rgba(42,26,10,0.83)", border: "none", borderRadius: 3, fontSize: 12, color: "#F5EDD6", letterSpacing: 1.5, textTransform: "uppercase" }}
+                      style={{ flex: 1, padding: "11px 0", background: "rgba(42,26,10,0.83)", border: "none", borderRadius: 3, fontSize: 14, color: "#F5EDD6", letterSpacing: 1.5, textTransform: "uppercase" }}
                     >
                       Name it
                     </button>
                   </div>
-                  <p style={{ fontSize: 12, fontStyle: "italic", color: "rgba(42,26,10,0.32)", textAlign: "center", margin: 0, maxWidth: 320 }}>
+                  <p style={{ fontSize: 14, fontStyle: "italic", color: "rgba(42,26,10,0.32)", textAlign: "center", margin: 0, maxWidth: 320 }}>
                     Every specimen exists only once. Name it before it disappears.
                   </p>
                 </>
@@ -506,7 +507,7 @@ export default function YourBugPage() {
                     <button
                       onClick={() => setScreen("discover")}
                       className="bug-btn"
-                      style={{ flex: 1, padding: "11px 0", background: "transparent", border: "1px solid rgba(42,26,10,0.28)", borderRadius: 3, fontSize: 12, color: "rgba(42,26,10,0.45)", letterSpacing: 1.5, textTransform: "uppercase" }}
+                      style={{ flex: 1, padding: "11px 0", background: "transparent", border: "1px solid rgba(42,26,10,0.28)", borderRadius: 3, fontSize: 14, color: "rgba(42,26,10,0.45)", letterSpacing: 1.5, textTransform: "uppercase" }}
                     >
                       ← Back
                     </button>
@@ -514,7 +515,7 @@ export default function YourBugPage() {
                       onClick={submit}
                       disabled={!commonName.trim()}
                       className="bug-btn"
-                      style={{ flex: 1, padding: "11px 0", background: commonName.trim() ? "rgba(42,26,10,0.83)" : "rgba(42,26,10,0.18)", border: "none", borderRadius: 3, fontSize: 12, color: "#F5EDD6", letterSpacing: 1.5, textTransform: "uppercase" }}
+                      style={{ flex: 1, padding: "11px 0", background: commonName.trim() ? "rgba(42,26,10,0.83)" : "rgba(42,26,10,0.18)", border: "none", borderRadius: 3, fontSize: 14, color: "#F5EDD6", letterSpacing: 1.5, textTransform: "uppercase" }}
                     >
                       Catalogue it
                     </button>
@@ -523,21 +524,29 @@ export default function YourBugPage() {
               )
             ) : (
               <>
-                <p style={{ fontSize: 13, fontStyle: "italic", color: "rgba(42,26,10,0.5)", textAlign: "center", margin: 0 }}>
+                <p style={{ fontSize: 15, fontStyle: "italic", color: "rgba(42,26,10,0.5)", textAlign: "center", margin: 0 }}>
                   Added to your collection.
                 </p>
+                <div style={{ margin: "8px 0 4px" }}>
+                  <ShareButtons
+                    theme="light"
+                    label="Share your discovery"
+                    text={`I just discovered ${name.genus} ${name.species} — "${commonName}" — on wastemytime.fun`}
+                    url="https://www.wastemytime.fun/your-bug"
+                  />
+                </div>
                 <div style={{ display: "flex", gap: 10, width: "100%", maxWidth: 360 }}>
                   <button
                     onClick={() => setScreen("archive")}
                     className="bug-btn"
-                    style={{ flex: 1, padding: "11px 0", background: "transparent", border: "1px solid rgba(42,26,10,0.28)", borderRadius: 3, fontSize: 12, color: "rgba(42,26,10,0.55)", letterSpacing: 1.5, textTransform: "uppercase" }}
+                    style={{ flex: 1, padding: "11px 0", background: "transparent", border: "1px solid rgba(42,26,10,0.28)", borderRadius: 3, fontSize: 14, color: "rgba(42,26,10,0.55)", letterSpacing: 1.5, textTransform: "uppercase" }}
                   >
                     View Archive
                   </button>
                   <button
                     onClick={regen}
                     className="bug-btn"
-                    style={{ flex: 1, padding: "11px 0", background: "rgba(42,26,10,0.83)", border: "none", borderRadius: 3, fontSize: 12, color: "#F5EDD6", letterSpacing: 1.5, textTransform: "uppercase" }}
+                    style={{ flex: 1, padding: "11px 0", background: "rgba(42,26,10,0.83)", border: "none", borderRadius: 3, fontSize: 14, color: "#F5EDD6", letterSpacing: 1.5, textTransform: "uppercase" }}
                   >
                     Find Another
                   </button>

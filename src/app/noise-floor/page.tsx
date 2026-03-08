@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 /* ─────────────────────────────────────────────
    TYPES
@@ -84,7 +85,6 @@ export default function NoiseFloor() {
   const [obsVisible, setObsVisible] = useState(true);
   const [result, setResult] = useState<Reading | null>(null);
   const [resultObs, setResultObs] = useState<Observation[]>([]);
-  const [copied, setCopied] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -299,14 +299,6 @@ export default function NoiseFloor() {
     setLiveDb(null);
   }, [stopAudio]);
 
-  const copyResult = useCallback(() => {
-    if (!result) return;
-    const text = `The Noise Floor — wastemytime.fun\n\nMy room averaged ${result.avg}dB. That's comparable to ${getComparison(result.avg)}.\nQuietest: ${result.min}dB · Loudest: ${result.max}dB\n\nYour room is never silent.`;
-    navigator.clipboard.writeText(text).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  }, [result]);
 
   /* ── Progress ── */
   const progressPct = Math.min((elapsed / DURATION) * 100, 100);
@@ -342,7 +334,7 @@ export default function NoiseFloor() {
     background: "transparent",
     color: bright,
     fontFamily: mono,
-    fontSize: "0.68rem",
+    fontSize: "0.78rem",
     letterSpacing: "0.18em",
     textTransform: "uppercase",
     cursor: "pointer",
@@ -353,7 +345,7 @@ export default function NoiseFloor() {
     ...btnStyle,
     padding: "0.65rem 1.6rem",
     color: mid,
-    fontSize: "0.62rem",
+    fontSize: "0.74rem",
   };
 
   /* ─────────────────────────────────────────────
@@ -375,7 +367,7 @@ export default function NoiseFloor() {
       {/* ══ INTRO ══ */}
       <div style={{ ...base, opacity: screen === "intro" ? 1 : 0, pointerEvents: screen === "intro" ? "all" : "none", textAlign: "center", gap: 0 }}>
 
-        <p style={{ fontFamily: mono, fontSize: "0.58rem", letterSpacing: "0.35em", textTransform: "uppercase", color: mid, marginBottom: "2.5rem" }}>
+        <p style={{ fontFamily: mono, fontSize: "0.82rem", letterSpacing: "0.35em", textTransform: "uppercase", color: mid, marginBottom: "2.5rem" }}>
           An ambient experiment
         </p>
 
@@ -387,7 +379,7 @@ export default function NoiseFloor() {
           your room is never silent
         </p>
 
-        <p style={{ fontFamily: mono, fontSize: "0.72rem", fontWeight: 300, color: mid, lineHeight: 2.1, letterSpacing: "0.02em", maxWidth: 360, marginBottom: "3.5rem" }}>
+        <p style={{ fontFamily: mono, fontSize: "0.82rem", fontWeight: 300, color: mid, lineHeight: 2.1, letterSpacing: "0.02em", maxWidth: 360, marginBottom: "3.5rem" }}>
           Place your device still.<br />
           <span style={{ color: bright }}>30 seconds.</span> That&apos;s all.<br /><br />
           We&apos;ll listen to what you&apos;ve stopped hearing —<br />
@@ -395,7 +387,7 @@ export default function NoiseFloor() {
         </p>
 
         {/* Privacy note */}
-        <p style={{ fontFamily: mono, fontSize: "0.58rem", color: dim, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
+        <p style={{ fontFamily: mono, fontSize: "0.82rem", color: dim, letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
           🔒 &nbsp;no audio is ever recorded or sent anywhere
         </p>
 
@@ -408,6 +400,15 @@ export default function NoiseFloor() {
           <span style={{ width: 6, height: 6, borderRadius: "50%", background: "currentColor", display: "inline-block", animation: "pulse 2s ease-in-out infinite" }} />
           begin listening
         </button>
+
+        <div style={{ marginTop: "2.5rem" }}>
+          <ShareButtons
+            theme="dark"
+            label="Share this activity"
+            text="The Noise Floor — how loud is your room, really? 30 seconds to find out."
+            url="https://www.wastemytime.fun/noise-floor"
+          />
+        </div>
       </div>
 
       {/* ══ DENIED ══ */}
@@ -436,7 +437,7 @@ export default function NoiseFloor() {
       <div style={{ ...base, opacity: screen === "listening" ? 1 : 0, pointerEvents: screen === "listening" ? "all" : "none", justifyContent: "center", gap: 0 }}>
 
         {/* Header label */}
-        <p style={{ position: "absolute", top: "2.5rem", fontFamily: mono, fontSize: "0.58rem", letterSpacing: "0.3em", textTransform: "uppercase", color: dim }}>
+        <p style={{ position: "absolute", top: "2.5rem", fontFamily: mono, fontSize: "0.82rem", letterSpacing: "0.3em", textTransform: "uppercase", color: dim }}>
           listening to your room
         </p>
 
@@ -482,7 +483,7 @@ export default function NoiseFloor() {
           }}>
             {liveDb ?? "—"}
           </div>
-          <div style={{ fontFamily: mono, fontSize: "0.56rem", letterSpacing: "0.25em", color: dim, textTransform: "uppercase", marginTop: "0.3rem" }}>
+          <div style={{ fontFamily: mono, fontSize: "0.7rem", letterSpacing: "0.25em", color: dim, textTransform: "uppercase", marginTop: "0.3rem" }}>
             dB current
           </div>
         </div>
@@ -493,13 +494,13 @@ export default function NoiseFloor() {
             <div style={{ position: "absolute", left: 0, top: 0, height: "100%", background: accent, width: `${progressPct}%`, transition: "width 1s linear" }} />
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ fontFamily: mono, fontSize: "0.55rem", letterSpacing: "0.15em", color: dim, textTransform: "uppercase" }}>0s</span>
-            <span style={{ fontFamily: mono, fontSize: "0.55rem", letterSpacing: "0.15em", color: mid, textTransform: "uppercase" }}>{remaining}s</span>
+            <span style={{ fontFamily: mono, fontSize: "0.7rem", letterSpacing: "0.15em", color: dim, textTransform: "uppercase" }}>0s</span>
+            <span style={{ fontFamily: mono, fontSize: "0.7rem", letterSpacing: "0.15em", color: mid, textTransform: "uppercase" }}>{remaining}s</span>
           </div>
         </div>
 
         {/* Privacy reassurance during listening */}
-        <p style={{ fontFamily: mono, fontSize: "0.55rem", color: "#2a2a2a", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>
+        <p style={{ fontFamily: mono, fontSize: "0.7rem", color: "#2a2a2a", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1rem" }}>
           🔒 &nbsp;audio never leaves your device
         </p>
 
@@ -530,7 +531,7 @@ export default function NoiseFloor() {
       }}>
         {result && (
           <>
-            <p style={{ fontFamily: mono, fontSize: "0.58rem", letterSpacing: "0.35em", textTransform: "uppercase", color: dim, marginBottom: "2rem" }}>
+            <p style={{ fontFamily: mono, fontSize: "0.82rem", letterSpacing: "0.35em", textTransform: "uppercase", color: dim, marginBottom: "2rem" }}>
               your room has spoken
             </p>
 
@@ -543,7 +544,7 @@ export default function NoiseFloor() {
             <div style={{ fontFamily: mono, fontSize: "clamp(5rem,15vw,9rem)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.04em", margin: "1rem 0 0.2rem" }}>
               {result.avg}
             </div>
-            <p style={{ fontFamily: mono, fontSize: "0.62rem", letterSpacing: "0.28em", color: dim, textTransform: "uppercase", marginBottom: "1.8rem" }}>
+            <p style={{ fontFamily: mono, fontSize: "0.74rem", letterSpacing: "0.28em", color: dim, textTransform: "uppercase", marginBottom: "1.8rem" }}>
               average dB · 60 second reading
             </p>
 
@@ -567,7 +568,7 @@ export default function NoiseFloor() {
                   <div style={{ fontFamily: mono, fontSize: "clamp(1rem,4vw,1.4rem)", fontWeight: 400, color: "#f0f0f0", letterSpacing: "-0.02em" }}>
                     {s.value}
                   </div>
-                  <div style={{ fontFamily: mono, fontSize: "0.52rem", letterSpacing: "0.18em", color: dim, textTransform: "uppercase", lineHeight: 1.5, whiteSpace: "pre-line" }}>
+                  <div style={{ fontFamily: mono, fontSize: "0.78rem", letterSpacing: "0.18em", color: dim, textTransform: "uppercase", lineHeight: 1.5, whiteSpace: "pre-line" }}>
                     {s.label}
                   </div>
                 </div>
@@ -575,27 +576,37 @@ export default function NoiseFloor() {
             </div>
 
             {/* Comparable to */}
-            <p style={{ fontFamily: mono, fontSize: "0.65rem", color: mid, letterSpacing: "0.1em", marginBottom: "2.5rem" }}>
+            <p style={{ fontFamily: mono, fontSize: "0.76rem", color: mid, letterSpacing: "0.1em", marginBottom: "2.5rem" }}>
               comparable to <span style={{ color: bright }}>{getComparison(result.avg)}</span>
             </p>
 
             {/* Observations */}
             <div style={{ width: "min(480px,90vw)", margin: "0 auto 2.5rem", textAlign: "left" }}>
-              <p style={{ fontFamily: mono, fontSize: "0.56rem", letterSpacing: "0.28em", color: dim, textTransform: "uppercase", borderBottom: "1px solid #1a1a1a", paddingBottom: "0.7rem", marginBottom: "0.8rem" }}>
+              <p style={{ fontFamily: mono, fontSize: "0.7rem", letterSpacing: "0.28em", color: dim, textTransform: "uppercase", borderBottom: "1px solid #1a1a1a", paddingBottom: "0.7rem", marginBottom: "0.8rem" }}>
                 moments noticed
               </p>
               {resultObs.map((o, i) => (
                 <div key={i} style={{ display: "flex", gap: "1rem", padding: "0.55rem 0", borderBottom: "1px solid #131313", alignItems: "flex-start" }}>
-                  <span style={{ fontFamily: mono, fontSize: "0.58rem", color: dim, whiteSpace: "nowrap", paddingTop: "0.1rem", flexShrink: 0 }}>{o.time}s</span>
+                  <span style={{ fontFamily: mono, fontSize: "0.82rem", color: dim, whiteSpace: "nowrap", paddingTop: "0.1rem", flexShrink: 0 }}>{o.time}s</span>
                   <span style={{ fontFamily: serif, fontSize: "0.95rem", fontStyle: "italic", color: mid, lineHeight: 1.4 }}>{o.text}</span>
                 </div>
               ))}
             </div>
 
             {/* Privacy note on result too */}
-            <p style={{ fontFamily: mono, fontSize: "0.55rem", color: "#2a2a2a", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
+            <p style={{ fontFamily: mono, fontSize: "0.7rem", color: "#2a2a2a", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "1.5rem" }}>
               🔒 &nbsp;no audio was recorded or stored
             </p>
+
+            {/* Share */}
+            <div style={{ marginBottom: "2rem" }}>
+              <ShareButtons
+                theme="dark"
+                label="Share your result"
+                text={`The Noise Floor — my room averaged ${result.avg}dB. That's comparable to ${getComparison(result.avg)}. Your room is never silent.`}
+                url="https://www.wastemytime.fun/noise-floor"
+              />
+            </div>
 
             {/* Actions */}
             <div style={{ display: "flex", gap: "0.75rem", justifyContent: "center", flexWrap: "wrap", marginBottom: "2.5rem" }}>
@@ -603,10 +614,6 @@ export default function NoiseFloor() {
                 onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = "#f0f0f0"; (e.currentTarget as HTMLButtonElement).style.color = "#f0f0f0"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = mid; (e.currentTarget as HTMLButtonElement).style.color = bright; }}
                 onClick={goHome}>← listen again</button>
-              <button style={ghostBtn}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = accent; (e.currentTarget as HTMLButtonElement).style.color = accent; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.borderColor = dim; (e.currentTarget as HTMLButtonElement).style.color = mid; }}
-                onClick={copyResult}>{copied ? "copied ✓" : "copy result"}</button>
             </div>
 
             {/* You May Like */}

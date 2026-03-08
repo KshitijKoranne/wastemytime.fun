@@ -3,6 +3,7 @@
 import { useState } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 interface FormState {
   marks: string;
@@ -413,6 +414,14 @@ export default function SharmaJiKaBeta() {
             </button>
 
             <YouMayLike currentId="sharma-ji-ka-beta" labelColor="rgba(0,0,0,0.35)" />
+            <div className="mt-4">
+              <ShareButtons
+                theme="light"
+                label="Share your result"
+                text={`I scored ${result.score}/100 on Sharma Ji Ka Beta test — ${result.verdict}. Are you a better beta than me?`}
+                url="https://www.wastemytime.fun/sharma-ji-ka-beta"
+              />
+            </div>
           </div>
         )}
       </div>

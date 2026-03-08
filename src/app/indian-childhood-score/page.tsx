@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 const items = [
   // Food & Eating
@@ -287,6 +288,16 @@ export default function IndianChildhoodScore() {
         {showResult && (
           <div className="mt-6">
             <YouMayLike currentId="indian-childhood-score" labelColor="rgba(0,0,0,0.35)" />
+          </div>
+        )}
+        {showResult && (
+          <div className="mt-4">
+            <ShareButtons
+              theme="light"
+              label="Share your score"
+              text={`I scored ${score}/${items.length} on the Indian Childhood Score — ${tier.name}. How desi was your childhood?`}
+              url="https://www.wastemytime.fun/indian-childhood-score"
+            />
           </div>
         )}
       </div>

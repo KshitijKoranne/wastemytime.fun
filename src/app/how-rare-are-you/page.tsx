@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import BackLink from "@/components/BackLink";
 import YouMayLike from "@/components/YouMayLike";
+import ShareButtons from "@/components/ShareButtons";
 
 interface Trait {
   id: string;
@@ -302,6 +303,14 @@ export default function HowRareAreYou() {
 
           <div style={{ width: "min(90vw, 680px)", marginTop: 8 }}>
             <YouMayLike currentId="how-rare-are-you" />
+          </div>
+          <div style={{ marginTop: 4 }}>
+            <ShareButtons
+              theme="dark"
+              label="Share your rarity"
+              text={`I am 1 in ${formatRarity(rarity)} people on Earth. How rare are you? wastemytime.fun`}
+              url="https://www.wastemytime.fun/how-rare-are-you"
+            />
           </div>
         </div>
       </div>
