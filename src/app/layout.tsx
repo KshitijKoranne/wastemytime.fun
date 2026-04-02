@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Waste My Time",
   },
   description:
-    "Six genuinely fun, interactive web experiments to waste your afternoon on. Draw circles, listen to your room's silence, discover how rare you are, and more. No ads, no sign-up.",
+    "A growing collection of genuinely fun, interactive web experiments to waste your afternoon on. Draw circles, listen to your room's silence, discover how rare you are, explore time dilation, and more. No ads, no sign-up.",
   keywords: [
     "waste my time",
     "wastemytime fun",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Waste My Time — Fun Interactive Experiences",
     description:
-      "Six genuinely fun, interactive web experiments. Draw circles, listen to your room, discover how rare you are. No ads, no sign-up.",
+      "Interactive web experiments for your afternoon. Draw circles, explore time dilation, listen to your room, discover how rare you are. No ads, no sign-up.",
     url: "https://www.wastemytime.fun",
     siteName: "Waste My Time",
     type: "website",
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Waste My Time — Fun Interactive Experiences",
     description:
-      "Six genuinely fun, interactive web experiments. Draw circles, listen to your room, discover how rare you are.",
+      "Interactive web experiments for your afternoon. Draw circles, explore time dilation, listen to your room, discover how rare you are.",
     images: ["/og-image.png"],
     creator: "@kjrlabs",
     site: "@kjrlabs",
@@ -116,53 +116,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Interactive Experiences on Waste My Time",
-    "description": "A collection of fun, interactive web experiments",
+    "description": "A growing collection of fun, interactive web experiments",
     "url": "https://www.wastemytime.fun",
-    "numberOfItems": 6,
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Sharma Ji Ka Beta",
-        "description": "Benchmark yourself against the mythical Sharma Ji Ka Beta with a personalised AI roast. Enter your marks, job, and salary.",
-        "url": "https://www.wastemytime.fun/sharma-ji-ka-beta",
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Indian Childhood Score",
-        "description": "40 hyperspecific Indian childhood moments — steel tiffin boxes, DD National, chappals near the door. Discover your desi score.",
-        "url": "https://www.wastemytime.fun/indian-childhood-score",
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "name": "The Overthinking Spiral",
-        "description": "Type any worry. Watch AI escalate it into five increasingly absurd catastrophic steps, then find calm.",
-        "url": "https://www.wastemytime.fun/overthinking-spiral",
-      },
-      {
-        "@type": "ListItem",
-        "position": 4,
-        "name": "Draw a Circle",
-        "description": "Draw a freehand circle on screen and get scored on how close to perfect it is. Can you beat 90%?",
-        "url": "https://www.wastemytime.fun/draw-a-circle",
-      },
-      {
-        "@type": "ListItem",
-        "position": 5,
-        "name": "How Rare Are You?",
-        "description": "Select traits that apply to you and discover your rarity as 1 in X people, visualised as a glowing dot in a crowd.",
-        "url": "https://www.wastemytime.fun/how-rare-are-you",
-      },
-      {
-        "@type": "ListItem",
-        "position": 6,
-        "name": "The Noise Floor",
-        "description": "60 seconds of ambient listening. Discover what your room actually sounds like when you stop ignoring it.",
-        "url": "https://www.wastemytime.fun/noise-floor",
-      },
-    ],
   };
 
   const orgSchema = {
