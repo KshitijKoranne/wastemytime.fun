@@ -12,16 +12,6 @@ export interface Activity {
 export const activities: Activity[] = [
   // Newest first
   {
-    id: "sign-the-void",
-    title: "Sign the Void",
-    tagline: "Send a signal. See how far it travels.",
-    path: "/sign-the-void",
-    bg: "#03040A",
-    text: "#C8D4FF",
-    shape: "dots",
-    image: "/images/sign-the-void.png",
-  },
-  {
     id: "millers-planet",
     title: "Miller's Planet",
     tagline: "1 hour here. 7 years on Earth.",
