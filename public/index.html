@@ -4,149 +4,51 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Waste My Time</title>
-<meta name="description" content="A night fair on the internet. Walk the midway, step up to a stall, and lose an evening on small strange games.">
+<meta name="description" content="Small, strange games for the minutes you have to spare.">
 <meta property="og:title" content="Waste My Time">
-<meta property="og:description" content="A night fair on the internet. Walk the midway and step up to a stall.">
-<meta name="theme-color" content="#0b0e16">
-<link rel="icon" href="assets/art/ticket.jpg">
+<meta property="og:description" content="Small, strange games for the minutes you have to spare.">
+<meta property="og:image" content="https://wastemytime.fun/tiles/truth-booth.jpg">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/assets/art/ticket.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600&family=Special+Elite&display=swap" rel="stylesheet">
-<link rel="modulepreload" href="fair.js">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --night:#0b0e16; --cream:#f1e6cf; --ticket:#c8352d; --ticket-dk:#8e211c; --ink:#1d1a17; --gold:#e3b04b;
-  --glass:rgba(12,14,20,.62); --ui:"Bricolage Grotesque",system-ui,sans-serif; --slab:"Alfa Slab One",Georgia,serif;
-  color-scheme:dark;
-}
+:root{--ink:#1d1a17;--muted:#6f6760;--red:#c8352d;--bg:#ffffff;color-scheme:light}
 *{box-sizing:border-box}
-[hidden]{display:none!important}
-html,body{margin:0;height:100%;overflow:hidden;background:var(--night);color:var(--cream);font-family:var(--ui);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
-button{font:inherit;color:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-#fair{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
-
-/* chips and pills over the scene */
-.chip{background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(241,230,207,.14);border-radius:999px;padding:9px 14px;font-size:14px;line-height:1.2}
-.top{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;gap:10px;
-  padding:calc(12px + env(safe-area-inset-top,0px)) 16px 0;pointer-events:none;z-index:5}
-.top>*{pointer-events:auto}
-.tix{display:flex;align-items:center;gap:8px;font-weight:700;font-variant-numeric:tabular-nums}
-.tix img{width:24px;height:22px;border-radius:2px;transform:rotate(-8deg)}
-.tix.pop{animation:pop .5s cubic-bezier(.3,1.7,.5,1)}
-@keyframes pop{40%{transform:scale(1.25)}}
-.right{display:flex;gap:8px}
-button.chip:hover{background:rgba(24,27,36,.8)}
-.pill{position:fixed;left:50%;transform:translate(-50%,12px);opacity:0;transition:opacity .35s,transform .35s;pointer-events:none;
-  max-width:min(92vw,560px);text-align:center;font-size:15px;line-height:1.4;z-index:6;padding:11px 18px;border-radius:16px}
-.pill.on{opacity:1;transform:translate(-50%,0)}
-#hint,#bhint{bottom:calc(22px + env(safe-area-inset-bottom,0px))}
-#toast{top:calc(64px + env(safe-area-inset-top,0px))}
-
-/* ticket-red buttons */
-.btn{border:0;border-radius:6px;padding:15px 22px;font-weight:800;font-size:17px;letter-spacing:.01em;color:#fff7ea;background:var(--ticket);
-  box-shadow:0 4px 0 var(--ticket-dk),0 14px 28px -10px rgba(0,0,0,.7);transition:transform .08s,box-shadow .08s}
-.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ticket-dk)}
-.btn[disabled]{opacity:.55;cursor:default}
-.btn.plain{background:transparent;color:var(--cream);box-shadow:none;border:1.5px solid rgba(241,230,207,.35)}
-
-/* the entrance */
-#intro{position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:24px 16px;
-  background:radial-gradient(120% 80% at 50% 40%,rgba(11,14,22,.55),rgba(6,8,13,.94) 70%);transition:opacity .9s}
-#intro.gone{opacity:0;pointer-events:none}
-.gate{display:grid;justify-items:center;gap:22px;max-width:640px;text-align:center}
-.gate img{width:min(92vw,620px);height:auto;border-radius:3px;box-shadow:0 30px 60px -20px #000,0 0 0 6px #17140f}
-.gate p{margin:0;font-size:18px;line-height:1.5;max-width:30ch;color:rgba(241,230,207,.86)}
-#bar{width:min(70vw,260px);height:3px;background:rgba(241,230,207,.15);border-radius:3px;overflow:hidden}
-#bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .2s}
-.small{font-size:13px;color:rgba(241,230,207,.55)}
-
-/* the booth */
-#cardNo{font-weight:600}
-#booth .top{justify-content:flex-start;right:auto}
-#read{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:6;
-  width:min(92vw,460px);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 10px 10px 18px;border-radius:14px}
-#verdict{margin:0;font-weight:700;font-size:16px}
-#verdict.ok{color:#9fe3b4} #verdict.no{color:#ffb4a8}
-#plus{display:block;font-size:13px;color:var(--gold);font-weight:600;margin-top:2px}
-#read .btn{padding:13px 18px;font-size:16px;white-space:nowrap}
-
-#end{position:fixed;inset:0;z-index:15;display:grid;place-items:center;padding:16px;background:rgba(6,8,13,.6)}
-.slip{width:min(100%,420px);max-height:calc(100% - 20px);overflow:auto;background:#efe4cc;color:var(--ink);border-radius:4px;padding:26px 24px 22px;
-  box-shadow:0 30px 70px -20px #000;font-family:"Special Elite","Courier New",monospace;position:relative}
-.slip::before,.slip::after{content:"";position:absolute;left:0;right:0;height:10px;background:radial-gradient(circle at 10px -2px,transparent 7px,#efe4cc 7.5px) 0 0/20px 10px repeat-x}
-.slip::before{top:-9px;transform:rotate(180deg)} .slip::after{bottom:-9px}
-.slip h2{margin:0;font-family:var(--slab);font-weight:400;font-size:17px;color:#6b5f52}
-.score{display:flex;align-items:baseline;gap:10px;margin:8px 0 2px}
-.score b{font-family:var(--slab);font-weight:400;font-size:84px;line-height:.9;color:var(--ink)}
-.rank{display:inline-block;margin:10px 0 6px;padding:6px 12px 4px;border:3px solid var(--ticket);outline:1.5px solid var(--ticket);outline-offset:-7px;color:var(--ticket);
-  font-family:var(--slab);font-size:20px;transform:rotate(-3deg);border-radius:4px}
-.slip p{margin:8px 0;font-size:16px;line-height:1.45}
-.slip h3{margin:16px 0 6px;font-family:var(--ui);font-size:13px;font-weight:700;color:#6b5f52}
-.slip ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
-.slip li{font-size:15px;line-height:1.35;padding-left:10px;border-left:3px solid var(--ticket)}
-.slip li span{display:block;font-size:13px;color:#6b5f52}
-.endbtns{display:grid;gap:10px;margin-top:18px;font-family:var(--ui)}
-.endbtns .plain{color:var(--ink);border-color:rgba(29,26,23,.35)}
-.tixline{display:flex;align-items:center;gap:8px;font-size:15px}
-.tixline img{width:26px;height:24px}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-@media (max-width:420px){.chip{padding:8px 12px;font-size:13px}#read{flex-wrap:wrap}#read .btn{width:100%}}
-@media (prefers-reduced-motion:reduce){*{transition-duration:1ms!important;animation:none!important}}
+html{background:var(--bg)}
+body{margin:0;color:var(--ink);font-family:"Bricolage Grotesque",system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+  padding:calc(48px + env(safe-area-inset-top,0px)) 16px calc(40px + env(safe-area-inset-bottom,0px))}
+header{text-align:center;margin:0 auto 40px;max-width:640px}
+h1{margin:0;font-family:"Alfa Slab One",Georgia,serif;font-weight:400;font-size:clamp(40px,9vw,64px);line-height:1;letter-spacing:-.01em}
+header p{margin:12px 0 0;font-size:18px;color:var(--muted)}
+.grid{list-style:none;margin:0 auto;padding:0;max-width:960px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,240px));justify-content:center;gap:32px 26px}
+@media (max-width:520px){.grid{grid-template-columns:repeat(2,1fr);gap:24px 14px}.grid h2{font-size:16px}.grid p{font-size:13.5px}.new{top:8px;left:8px}}
+.grid a{display:block;color:inherit;text-decoration:none}
+.tile{position:relative;display:block;aspect-ratio:1;border-radius:16px;overflow:hidden;background:#0b0e16;
+  box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 24px -14px rgba(0,0,0,.45);transition:transform .15s,box-shadow .15s}
+.tile img{display:block;width:100%;height:100%;object-fit:cover}
+.grid a:hover .tile,.grid a:focus-visible .tile{transform:translateY(-3px);box-shadow:0 2px 4px rgba(0,0,0,.08),0 18px 30px -14px rgba(0,0,0,.5)}
+.grid a:focus-visible{outline:none}
+.grid a:focus-visible .tile{outline:3px solid var(--red);outline-offset:3px}
+.new{position:absolute;top:12px;left:12px;background:var(--red);color:#fff;font-weight:700;font-size:12px;padding:4px 9px;border-radius:999px}
+.grid h2{margin:12px 2px 2px;font-size:18px;font-weight:700}
+.grid p{margin:0 2px;font-size:14.5px;line-height:1.4;color:var(--muted)}
+footer{margin:64px auto 0;text-align:center;font-size:14px;color:var(--muted)}
+footer a{color:inherit}
+@media (prefers-reduced-motion:reduce){.tile{transition:none}}
 </style>
 </head>
 <body>
-<canvas id="fair" aria-label="A night fair you can walk through"></canvas>
-
-<div id="intro">
-  <div class="gate">
-    <img src="assets/art/sign_entrance.jpg" alt="Waste My Time, night fair" width="1240" height="308">
-    <p>A night fair of small, strange games. Walk the midway and step up to a stall.</p>
-    <button class="btn" id="enter" type="button" disabled>Opening the gates</button>
-    <div id="loading"><div id="bar"><i></i></div></div>
-    <p class="small">Sound on is best. Works with a mouse, a keyboard or a finger.</p>
-  </div>
-</div>
-
-<div class="top" id="walkHud" hidden>
-  <span></span>
-  <div class="right">
-    <span class="chip tix" id="tix" title="Tickets you have won"><img src="assets/art/ticket.jpg" alt=""><b>0</b><span class="sr"> tickets</span></span>
-    <button class="chip" id="snd" type="button" aria-pressed="true">Sound on</button>
-  </div>
-</div>
-<p class="pill chip" id="hint" role="status"></p>
-<p class="pill chip" id="toast" role="status"></p>
-
-<div id="booth" hidden>
-  <div class="top">
-    <button class="chip" id="leaveBtn" type="button">Leave</button>
-    <span class="chip" id="cardNo">Card 1 of 10</span>
-  </div>
-  <p class="pill chip" id="bhint"></p>
-  <div id="read" class="chip" hidden>
-    <div><p id="verdict"></p><span id="plus">+1 ticket</span></div>
-    <button class="btn" id="nextBtn" type="button">Next card</button>
-  </div>
-</div>
-
-<div id="end" hidden>
-  <div class="slip" role="dialog" aria-labelledby="endTitle">
-    <h2 id="endTitle">Your round at the Truth Booth</h2>
-    <div class="score"><b id="eScore">0</b><span>of <span id="eTotal">10</span> right</span></div>
-    <div class="rank" id="eRank"></div>
-    <p id="eLine"></p>
-    <p class="tixline"><img src="assets/art/ticket.jpg" alt=""> <span>You now hold <b id="eTix">0</b> tickets.<span id="ePerfect" hidden> A perfect round adds 5 more.</span></span></p>
-    <div id="eMissWrap"><h3>The ones that fooled you</h3><ul id="eMiss"></ul></div>
-    <div class="endbtns">
-      <button class="btn" id="againBtn" type="button">Play another round</button>
-      <button class="btn plain" id="shareBtn" type="button">Share my result</button>
-      <button class="btn plain" id="fairBtn" type="button">Back to the fair</button>
-    </div>
-  </div>
-</div>
-<div class="sr" aria-live="polite" id="live"></div>
-<noscript><p style="padding:24px">The fair needs JavaScript and WebGL to open its gates.</p></noscript>
-<script type="module" src="fair.js"></script>
+<header>
+  <h1>Waste My Time</h1>
+  <p>Small, strange games for the minutes you have to spare.</p>
+</header>
+<ul class="grid">
+  <li><a href="/truth-booth"><span class="tile"><img src="/tiles/truth-booth.jpg" alt="" width="600" height="600"></span><h2>Truth Booth</h2><p>Stamp strange claims real or fake.</p></a></li>
+  <li><a href="/guess-the-weight"><span class="tile"><img src="/tiles/guess-the-weight.jpg" alt="" width="600" height="600"><span class="new">New</span></span><h2>Guess the Weight</h2><p>How heavy is a cloud?</p></a></li>
+  <li><a href="/night-ride"><span class="tile"><img src="/tiles/night-ride.jpg" alt="" width="600" height="600"><span class="new">New</span></span><h2>Night Ride</h2><p>A turn on the big wheel after dark.</p></a></li>
+</ul>
+<footer>Made by <a href="https://kjrlabs.in">KJR Labs</a></footer>
 </body>
 </html>

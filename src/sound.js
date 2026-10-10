@@ -77,3 +77,9 @@ export function bell() { if (!ac) return; const t = ac.currentTime; [1, 2.76, 5.
 export function buzz() { if (!ac) return; const t = ac.currentTime; const o = tone(t, 110, 0.5, 0.18, 'sawtooth'); o.frequency.setValueAtTime(110, t); o.frequency.linearRampToValueAtTime(92, t + 0.45); }
 export function toss() { if (!ac) return; noise(ac.currentTime + 0.35, 0.12, 'lowpass', 900, 0.3); paper(); }
 export function step() { if (!ac) return; noise(ac.currentTime, 0.06, 'lowpass', 700, 0.05); }
+
+/* scale sounds */
+export function tick() { if (!ac) return; noise(ac.currentTime, 0.025, 'bandpass', 4200, 0.12, 6); }
+export function clunk() { if (!ac) return; const t = ac.currentTime; const o = tone(t, 92, 0.35, 0.5, 'triangle'); o.frequency.exponentialRampToValueAtTime(60, t + 0.3); noise(t, 0.09, 'bandpass', 1800, 0.35, 2); tone(t + 0.01, 1240, 0.5, 0.05); }
+export function creak() { if (!ac) return; const t = ac.currentTime; for (let i = 0; i < 6; i++) noise(t + i * 0.11, 0.08, 'bandpass', 700 + Math.random() * 500, 0.06, 9); }
+export function boing() { if (!ac) return; const t = ac.currentTime; const o = tone(t, 180, 0.6, 0.12, 'sine'); o.frequency.setValueAtTime(180, t); o.frequency.linearRampToValueAtTime(520, t + 0.08); o.frequency.exponentialRampToValueAtTime(140, t + 0.55); }

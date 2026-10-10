@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Night Ride</title>
+<meta name="description" content="Take a turn on the Ferris wheel above a fair at night. Stop at the top and look out over the field.">
+<meta property="og:title" content="Night Ride">
+<meta property="og:description" content="Take a turn on the Ferris wheel above a fair at night. Stop at the top and look out over the field.">
+<meta property="og:image" content="https://wastemytime.fun/tiles/night-ride.jpg">
+<meta name="theme-color" content="#0b0e16">
+<link rel="icon" href="/assets/art/ticket.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fair.css">
+<link rel="modulepreload" href="/js/ride.js">
+</head>
+<body>
+<canvas id="fair" aria-label="A Ferris wheel above a fair at night"></canvas>
+<div id="intro">
+  <div class="gate">
+    <h1>Night Ride</h1>
+    <p>A turn on the big wheel above the fair. It stops at the top for a while. Drag to look around.</p>
+    <button class="btn" id="start" type="button" disabled>The wheel is turning</button>
+    <div id="loading"><div id="bar"><i></i></div></div>
+    <a class="small" href="/">All games</a>
+  </div>
+</div>
+<div class="top" id="hud" hidden>
+  <div class="left"><a class="chip" href="/">All games</a></div>
+  <div class="right">
+    <span class="chip tix" id="tix" title="Tickets you have won"><img src="/assets/art/ticket.jpg" alt=""><b>0</b><span class="sr"> tickets</span></span>
+    <button class="chip" id="snd" type="button" aria-pressed="true">Sound on</button>
+  </div>
+</div>
+<p class="pill chip" id="rhint"></p>
+<div id="again" hidden>
+  <button class="btn" id="againBtn" type="button">Ride again</button>
+  <a class="btn plain" href="/">All games</a>
+</div>
+<div class="sr" aria-live="polite" id="live"></div>
+<noscript><p style="padding:24px">This game needs JavaScript and WebGL.</p></noscript>
+<script type="module" src="/js/ride.js"></script>
+</body>
+</html>

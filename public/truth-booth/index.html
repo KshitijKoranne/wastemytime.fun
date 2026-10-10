@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Truth Booth</title>
+<meta name="description" content="Strange claims, one card at a time. Ink the stamp green for real or red for fake, and press it on the card.">
+<meta property="og:title" content="Truth Booth">
+<meta property="og:description" content="Strange claims, one card at a time. Ink the stamp green for real or red for fake, and press it on the card.">
+<meta property="og:image" content="https://wastemytime.fun/tiles/truth-booth.jpg">
+<meta name="theme-color" content="#0b0e16">
+<link rel="icon" href="/assets/art/ticket.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fair.css">
+<link rel="modulepreload" href="/js/truth.js">
+</head>
+<body>
+<canvas id="fair" aria-label="A fairground booth with a stamp, two ink pads and a card"></canvas>
+<div id="intro">
+  <div class="gate">
+    <h1>Truth Booth</h1>
+    <p>Strange claims arrive one card at a time. Ink the stamp green for real or red for fake, and press it on the card.</p>
+    <button class="btn" id="start" type="button" disabled>Setting up the booth</button>
+    <div id="loading"><div id="bar"><i></i></div></div>
+    <a class="small" href="/">All games</a>
+  </div>
+</div>
+<div class="top" id="hud" hidden>
+  <div class="left"><a class="chip" href="/">All games</a><span class="chip" id="cardNo">Card 1 of 10</span></div>
+  <div class="right">
+    <span class="chip tix" id="tix" title="Tickets you have won"><img src="/assets/art/ticket.jpg" alt=""><b>0</b><span class="sr"> tickets</span></span>
+    <button class="chip" id="snd" type="button" aria-pressed="true">Sound on</button>
+  </div>
+</div>
+<p class="pill chip" id="bhint"></p>
+<div id="read" class="chip" hidden>
+  <div><p id="verdict"></p><span id="plus">+1 ticket</span></div>
+  <button class="btn" id="nextBtn" type="button">Next card</button>
+</div>
+<div id="end" hidden>
+  <div class="slip" role="dialog" aria-labelledby="endTitle">
+    <h2 id="endTitle">Your round at the Truth Booth</h2>
+    <div class="score"><b id="eScore">0</b><span>of <span id="eTotal">10</span> right</span></div>
+    <div class="rank" id="eRank"></div>
+    <p id="eLine"></p>
+    <p class="tixline"><img src="/assets/art/ticket.jpg" alt=""> <span>You now hold <b id="eTix">0</b> tickets.<span id="ePerfect" hidden> A perfect round adds 5 more.</span></span></p>
+    <div id="eMissWrap"><h3>The ones that fooled you</h3><ul id="eMiss"></ul></div>
+    <div class="endbtns">
+      <button class="btn" id="againBtn" type="button">Play another round</button>
+      <button class="btn plain" id="shareBtn" type="button">Share my result</button>
+      <a class="btn plain" href="/">All games</a>
+    </div>
+  </div>
+</div>
+<div class="sr" aria-live="polite" id="live"></div>
+<noscript><p style="padding:24px">This game needs JavaScript and WebGL.</p></noscript>
+<script type="module" src="/js/truth.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild src/main.js --bundle --minify --format=esm --target=es2022 --outfile=public/fair.js"
+    "build": "rm -rf public/js && esbuild src/pages/truth.js src/pages/weight.js src/pages/ride.js --bundle --splitting --minify --format=esm --target=es2022 --outdir=public/js --chunk-names=chunks/[name]-[hash]"
   },
   "devDependencies": {
     "esbuild": "0.25.12",

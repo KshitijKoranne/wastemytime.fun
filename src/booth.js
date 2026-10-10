@@ -2,18 +2,14 @@ import * as THREE from 'three';
 import { CASES, RANKS } from './cases.js';
 import * as S from './sound.js';
 import { pbr, image, STALL, prop } from './world.js';
+import { save, persist } from './save.js';
 
 const INK = { real: '#1f7a45', fake: '#c0262d' };
-const KEY = 'wmt-fair';
 const TYPE = '"Special Elite", "Courier New", monospace', SLAB = '"Alfa Slab One", Georgia, serif', PEN = 'Caveat, "Comic Sans MS", cursive';
 const rand = (a, b) => a + Math.random() * (b - a);
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const smooth = (cur, to, k, dt) => cur + (to - cur) * (1 - Math.exp(-k * dt));
 
-let save = { seen: [], tickets: 0, rounds: 0 };
-try { Object.assign(save, JSON.parse(localStorage.getItem(KEY)) || {}); } catch (e) {}
-try { const old = JSON.parse(localStorage.getItem('wmt-real-or-fake')); if (old && old.seen && !save.seen.length) save.seen = old.seen; } catch (e) {}
-const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(save)); } catch (e) {} };
 export const tickets = () => save.tickets;
 
 /* ---------- the seal cut into the stamp's rubber ---------- */
@@ -122,7 +118,7 @@ export function createBooth({ group, camera, ui, bulbs, onTicket }) {
   const { top, D } = STALL;
   const zc = D / 2 - 0.25;
   const loader = new THREE.TextureLoader();
-  paperImg = new Image(); paperImg.src = 'assets/art/card_paper.jpg';
+  paperImg = new Image(); paperImg.src = '/assets/art/card_paper.jpg';
   const seal = sealCanvas();
 
   /* card: a thin box, printed on both sides */
@@ -142,7 +138,7 @@ export function createBooth({ group, camera, ui, bulbs, onTicket }) {
   const tin = new THREE.MeshStandardMaterial({ color: 0x8f8b84, metalness: 0.85, roughness: 0.58 });
   const pads = {};
   for (const [kind, x0, img] of [['real', -0.29, 'pad_green'], ['fake', 0.29, 'pad_red']]) {
-    const t = loader.load(`assets/art/${img}.jpg`); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+    const t = loader.load(`/assets/art/${img}.jpg`); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
     const topMat = new THREE.MeshStandardMaterial({ map: t, roughness: 0.5, metalness: 0.1 });
     const m = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.018, 0.14), [tin, tin, topMat, tin, tin, tin]);
     m.position.set(x0, top + 0.009, zc + 0.205); m.castShadow = m.receiveShadow = true; group.add(m);
@@ -221,7 +217,7 @@ export function createBooth({ group, camera, ui, bulbs, onTicket }) {
   const binned = [];
 
   /* the "Step right up" poster on the booth's side wall */
-  const pt = loader.load('assets/art/poster_stepup.jpg'); pt.colorSpace = THREE.SRGBColorSpace;
+  const pt = loader.load('/assets/art/poster_stepup.jpg'); pt.colorSpace = THREE.SRGBColorSpace;
   const poster = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.93), new THREE.MeshStandardMaterial({ map: pt, roughness: 0.85 }));
   poster.position.set(-STALL.W / 2 + 0.085, 1.9, 0.1); poster.rotation.y = Math.PI / 2; group.add(poster);
 
@@ -264,7 +260,7 @@ export function createBooth({ group, camera, ui, bulbs, onTicket }) {
 
   function start() {
     deck = deal(); idx = 0; results = [];
-    for (const b of binned.splice(0)) group.remove(b);
+    for (const b of binned.splice(0)) drop(b);
     view = 'counter'; ink = 0; inkKind = null; setRubber();
     showCard(true);
   }
@@ -347,19 +343,22 @@ export function createBooth({ group, camera, ui, bulbs, onTicket }) {
   function next() {
     if (phase !== 'read') return;
     const ans = !!CASES[deck[idx]][0], dest = bins[ans ? 'real' : 'fake'];
-    const flyer = card.clone(); flyer.material = card.material.map(m => m.clone()); flyer.material[2].map = canvasTex(frontCanvas); flyer.material[3].map = canvasTex(backMat.map.image);
+    // filed cards are small on screen: give them small textures, and free them when they leave
+    const flyer = card.clone(); flyer.material = card.material.map(m => m.clone()); flyer.material[2].map = canvasTex(shrink(frontCanvas)); flyer.material[3].map = canvasTex(shrink(backMat.map.image));
     group.add(flyer); binned.push(flyer);
     const from = card.position.clone(), to = new THREE.Vector3(dest.x + rand(-0.03, 0.03), (dest.y || top + 0.1) + Math.min(binned.length, 8) * 0.004, dest.z + rand(-0.02, 0.02));
     flights.push({ m: flyer, t: 0, from, to, r0: flyer.rotation.clone(), spin: rand(-1, 1) });
     S.toss();
     card.visible = false; view = 'counter';
     idx++;
-    if (binned.length > 14) group.remove(binned.shift());
+    if (binned.length > 14) drop(binned.shift());
     phase = 'between';
     if (idx >= deck.length) { phase = 'end'; setTimeout(() => { if (phase === 'end') finish(); }, 700); }
     else setTimeout(() => { if (phase === 'between') showCard(true); }, 380);
   }
   const flights = [];
+  function shrink(c) { const o = document.createElement('canvas'); o.width = 384; o.height = 256; o.getContext('2d').drawImage(c, 0, 0, 384, 256); return o; }
+  function drop(m) { group.remove(m); m.material.forEach((x, i) => { if (i === 2 || i === 3) { x.map.dispose(); x.dispose(); } }); }
 
   function finish() {
     save.rounds++;

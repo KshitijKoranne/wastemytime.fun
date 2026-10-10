@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guess the Weight</title>
+<meta name="description" content="A cloud, a whale heart, all the gold ever mined. Turn the red hand to your guess and pull the lever.">
+<meta property="og:title" content="Guess the Weight">
+<meta property="og:description" content="A cloud, a whale heart, all the gold ever mined. Turn the red hand to your guess and pull the lever.">
+<meta property="og:image" content="https://wastemytime.fun/tiles/guess-the-weight.jpg">
+<meta name="theme-color" content="#0b0e16">
+<link rel="icon" href="/assets/art/ticket.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/fair.css">
+<link rel="modulepreload" href="/js/weight.js">
+</head>
+<body>
+<canvas id="fair" aria-label="A fairground stage with a big dial scale and a crate on a rope"></canvas>
+<div id="intro">
+  <div class="gate">
+    <h1>Guess the Weight</h1>
+    <p>A crate comes down on a rope. Turn the red hand to how heavy you think it is, then pull the lever and watch the needle swing.</p>
+    <button class="btn" id="start" type="button" disabled>Oiling the scale</button>
+    <div id="loading"><div id="bar"><i></i></div></div>
+    <a class="small" href="/">All games</a>
+  </div>
+</div>
+<div class="top" id="hud" hidden>
+  <div class="left"><a class="chip" href="/">All games</a><span class="chip" id="wNo">Crate 1 of 6</span></div>
+  <div class="right">
+    <span class="chip tix" id="tix" title="Tickets you have won"><img src="/assets/art/ticket.jpg" alt=""><b>0</b><span class="sr"> tickets</span></span>
+    <button class="chip" id="snd" type="button" aria-pressed="true">Sound on</button>
+  </div>
+</div>
+<p class="pill chip" id="whint"></p>
+<div class="panel chip" id="wpanel" hidden>
+  <h3 id="wName"></h3>
+  <div class="row">
+    <p class="guessline">Your guess: <b id="wGuess">about 1 tonne</b></p>
+    <button class="btn" id="weighBtn" type="button">Weigh it</button>
+  </div>
+</div>
+<div class="panel chip" id="wres" hidden>
+  <p class="verdict" id="wVerdict"></p>
+  <p class="truth" id="wTruth"></p>
+  <p id="wNote"></p>
+  <div class="row">
+    <p class="guessline" id="wYou"></p>
+    <button class="btn" id="wNext" type="button">Next crate</button>
+  </div>
+</div>
+<div id="wend" hidden>
+  <div class="slip" role="dialog" aria-labelledby="wendTitle">
+    <h2 id="wendTitle">Your round at Guess the Weight</h2>
+    <div class="score"><b id="weScore">0</b><span>of <span id="weTotal">6</span> spot on</span></div>
+    <p class="tixline"><img src="/assets/art/ticket.jpg" alt=""> <span>You won <b id="weWon">0</b> tickets. You now hold <b id="weTix">0</b>.</span></p>
+    <table class="wtable" id="weRows"></table>
+    <div class="endbtns">
+      <button class="btn" id="wAgain" type="button">Weigh six more</button>
+      <a class="btn plain" href="/">All games</a>
+    </div>
+  </div>
+</div>
+<div class="sr" aria-live="polite" id="live"></div>
+<noscript><p style="padding:24px">This game needs JavaScript and WebGL.</p></noscript>
+<script type="module" src="/js/weight.js"></script>
+</body>
+</html>

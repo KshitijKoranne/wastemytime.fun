@@ -1,0 +1,22 @@
+// [what is in the crate, mass in grams, what the scale card says]. Append only.
+export const WEIGHTS = [
+  ['A housefly', 0.012, 'About 12 milligrams. It takes more than 80 flies to make one gram.'],
+  ['A grain of rice', 0.025, 'About 25 milligrams. Forty grains make a gram.'],
+  ['A bee hummingbird, the smallest bird alive', 2, 'About 2 grams. That is less than half a sheet of printer paper.'],
+  ['A sheet of A4 printer paper', 5, 'Normal printer paper is 80 grams per square metre. An A4 sheet is one sixteenth of a square metre, so it weighs 5 grams.'],
+  ['One litre of water', 1000, 'One kilogram. When the metric system began in the 1790s, the kilogram was defined as the mass of one litre of water.'],
+  ['The air in a box one metre on every side', 1225, 'About 1.2 kilograms at sea level. The air in your living room weighs more than you would think.'],
+  ['A human brain', 1350, 'About 1.3 to 1.4 kilograms. That is about 2% of your body weight, but the brain uses about 20% of your energy.'],
+  ['The heart of a blue whale', 180000, 'About 180 kilograms, measured on a heart kept by the Royal Ontario Museum. That is as heavy as two adults.'],
+  ['An adult male African elephant', 6000000, 'About 6 tonnes for a full-grown bull, and some reach 10. It is the heaviest animal that lives on land.'],
+  ['An adult blue whale', 150000000, 'Up to about 150 tonnes. It is the largest animal known to have ever lived.'],
+  ['The Statue of Liberty', 204000000, 'Over 200 tonnes. Her copper skin is only about 2.4 millimetres thick, hung on an iron and steel frame.'],
+  ['A Boeing 747-400 at take-off', 396900000, 'Up to about 397 tonnes, with fuel, passengers and bags.'],
+  ['The International Space Station', 420000000, 'About 420 tonnes. It was carried up piece by piece on more than 40 launches.'],
+  ['A fluffy cumulus cloud one kilometre across', 500000000, 'About 500 tonnes of water. It floats because the droplets are tiny and spread across a huge space.'],
+  ['The water in an Olympic swimming pool', 2500000000, 'At least 2,500 tonnes. The pool holds at least 2,500 cubic metres of water.'],
+  ['The Eiffel Tower', 10100000000, 'About 10,100 tonnes in total. The iron frame alone is about 7,300 tonnes.'],
+  ['All the gold ever mined', 222600000000, 'About 222,600 tonnes by mid-2026. All of it would fit in a cube about 22.6 metres wide.'],
+  ['The Great Pyramid of Giza', 5900000000000, 'About 6 million tonnes of stone, in about 2.3 million blocks.'],
+  ['A sugar cube of neutron star', 1e15, 'About a billion tonnes. A neutron star packs more mass than the Sun into a ball the size of a city.'],
+];
